@@ -3,30 +3,44 @@
 #define PUB_INIT_H
 
 #include "opts.h"
+#include "pub/typedef.h"
 
-#define OPT_DUMP 1
-#define OPT_CP   2
-#define OPT_PORT 3
+#define CMD_START       ((unsigned) 0X001F)  /* 启动服务 */
+#define CMD_STOP        ((unsigned) 0x002F)  /* 停止服务 */
+#define CMD_RESTART     ((unsigned) 0x003F)  /* 重启服务 */
+#define CMD_PS          ((unsigned) 0x004F)  /* 查看当前正在运行的所有JAVA服务信息 */
+#define CMD_CD          ((unsigned) 0x005F)  /* 进入 jar 包内部，并查看文件。pub cd exp.jar | pub cd */
+#define CMD_PACK        ((unsigned) 0x006F)  /* 将服务打包成docker镜像, pub pack docker */
+#define CMD_DUMP        ((unsigned) 0x007F)  /* 打印服务的堆栈日志一般用于排查OOM, 参数：输出文件名，默认 <服务名>.dump */
 
-static struct option options[] = {
-        { "", "dump", optional_argument, OPT_DUMP,
-          "打印服务的堆栈日志一般用于排查OOM, 参数：输出文件名，默认 <服务名>.dump" },
-        {"config.profile", "cp", required_argument, OPT_CP,
-         "设置配置文件profile, 比如 dev/prod" },
-        {"", "port", required_argument, OPT_PORT,"配置服务运行端口" },
+#define OPT_NSD          1
+#define OPT_CP           2
+#define OPT_PORT         3
+#define OPT_DEBUG_PORT   4
+#define OPT_MONITOR      5
 
+/* 命令的 option 列表 */
+const static struct option VMARCH_OPTIONS[] = {
+        {"notice-shutdown", "nsd",  no_argument,       OPT_NSD,        "启动检测服务是否宕机"},
+        {"conf-profile",    "cp",   required_argument, OPT_CP,         "设置配置文件profile, 比如 dev/prod"},
+        {"",                "port", required_argument, OPT_PORT,       "设置服务运行端口"},
+        {"",                "dp",   required_argument, OPT_DEBUG_PORT, "设置远程调试端口"},
+        {"monitor",         "mon",  no_argument,       OPT_MONITOR,    "监控服务运行情况"},
 };
 
-#define CMD_START   0x0001  /* 启动服务 */
-#define CMD_STOP    0x0010  /* 停止服务 */
-#define CMD_RESTART 0x0100  /* 重启服务 */
-#define CMD_PS      0x1000  /* 查看当前正在运行的所有服务信息 */
-
-/* 命令行参数结构体 */
-struct option_flags {
-    unsigned cmd_flags;     /* 运行命令，可以有多个。比如 pub start:ps */
-    char     cp[56];        /* config.profile, 配置文件环境。比如：dev, prod, test */
-    unsigned port;          /* 配置运行端口 */
+/* 命令行参数结构体。如果不懂什么意思的话：
+ * 请根据结构体成员名到 VMARCH_OPTIONS 去找对应的描述 */
+struct vmarch_option_flags {
+    unsigned cmd_flags;
+    BOOL     nsd;
+    char     cp[56];
+    unsigned port;
+    unsigned dp;
+    BOOL     mon;
 };
+
+/* 参数 flags 指针是函数的返回结构体。
+ * 而 vmarch_make_cmdline 的返回值是执行结果是否出现错误 */
+int vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flags);
 
 #endif /* PUB_INIT_H */
