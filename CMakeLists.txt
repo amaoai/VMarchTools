@@ -6,4 +6,4 @@ set(CMAKE_C_STANDARD 23)
 
 include_directories(${PROJECT_NAME} include)
 
-add_executable(pub main.c opts.c vmarch-init.c)
+add_executable(${PROJECT_NAME} main.c opts.c vmarch-init.c)

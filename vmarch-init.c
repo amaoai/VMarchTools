@@ -1,5 +1,3 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "hicpp-multiway-paths-covered"
 /* AUTHOR: TIAN_SHENG, DATE: 2022/7/11 */
 #include "init.h"
 #include <string.h>
@@ -9,6 +7,9 @@ VMARCHCMD has_cmd(char **argv)
 {
     char *ch_cmd = argv[1];
 
+    if (ch_cmd == NULL)
+        goto NO_CMD;
+
     if (strcmp(ch_cmd, "start") == 0) return VMARCHCMD_START;
     if (strcmp(ch_cmd, "stop") == 0) return VMARCHCMD_STOP;
     if (strcmp(ch_cmd, "restart") == 0) return VMARCHCMD_RESTART;
@@ -17,6 +18,7 @@ VMARCHCMD has_cmd(char **argv)
     if (strcmp(ch_cmd, "pack") == 0) return VMARCHCMD_PACK;
     if (strcmp(ch_cmd, "dump") == 0) return VMARCHCMD_DUMP;
 
+NO_CMD:
     return VMARCHCMD_NULL;
 }
 
