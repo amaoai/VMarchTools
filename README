@@ -3,10 +3,10 @@ vm-arch部署工具
 
 命令列表：
 
-  - start         启动服务
-  - stop          停止服务
-  - restart       重启服务
-  - ps            打印当前服务的运行状态
-  - exec          进入到JAR包内部
-  - pack          打包成docker镜像: vmarch pack docker
-  - dump          生成dump文件
+  - start   启动服务
+  - stop    停止服务
+  - restart 重启服务
+  - ps      打印当前服务的运行状态
+  - exec    进入到JAR包内部
+  - pack    打包成docker镜像: vmarch pack docker
+  - dump    生成dump文件
