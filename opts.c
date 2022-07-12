@@ -47,12 +47,14 @@ FIND_OPTION_END:
     return opt;
 }
 
+/* 参数查找，如果没有找到返回NULL */
 char *find_argument(int argc, char **argv, int *optidx, char *optch, const struct option *p_opt)
 {
     char *_optarg = NULL;
 
     /* 获取option参数 */
     if (p_opt->has_arg) {
+        /* 因为选项参数是在当前命令的下一个位置。所以这里optidx需要+1 */
         if ((++*optidx) < argc) {
             _optarg = argv[*optidx];
             /* 如果参数是option抛出错误, 因为option不能作为参数 */
@@ -83,12 +85,14 @@ int getopts(int argc, char **argv, const struct option *options, int size, int *
         /* 判断选项类型: not opt, long opt, short opt */
         int opttyp = is_opt(optopt);
 
+        /* 如果是选项的话去匹配已经定义好的option数组 */
         if (opttyp) {
             p_opt = find_option(optopt, opttyp, options, size);
 
             if (p_opt != NULL) {
                 *p_optval = p_opt->optval;
-                optarg = find_argument(argc, argv, &optidx, optopt, p_opt); /* 查找参数 */
+                /* 查找参数 */
+                optarg = find_argument(argc, argv, &optidx, optopt, p_opt);
             }
         }
 
