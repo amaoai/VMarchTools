@@ -50,20 +50,20 @@ FIND_OPTION_END:
 /* 参数查找，如果没有找到返回NULL */
 char *find_argument(int argc, char **argv, int *optidx, char *optch, const struct option *p_opt)
 {
-    char *_optarg = NULL;
+    char *_optarg_tmp = NULL;
 
     switch (p_opt->has_arg) {
         /* 必填参数 */
         case required_argument: {
             /* 因为选项参数是在当前命令的下一个位置。所以这里optidx需要+1 */
             if ((++*optidx) < argc) {
-                _optarg = argv[*optidx];
+                _optarg_tmp = argv[*optidx];
                 /* 如果参数是option抛出错误, 因为option不能作为参数 */
-                if (is_opt(_optarg))
-                    _optarg = NULL;
+                if (is_opt(_optarg_tmp))
+                    _optarg_tmp = NULL;
             }
 
-            if (_optarg == NULL) {
+            if (_optarg_tmp == NULL) {
                 opterr = OPTERR_NO_ARGUMENT;
                 printf("%s 选项需要包含参数\n", optch);
             }
@@ -76,19 +76,19 @@ char *find_argument(int argc, char **argv, int *optidx, char *optch, const struc
             int argidx = *optidx + 1;
 
             if (argidx < argc) {
-                _optarg = argv[argidx];
-                if (is_opt(_optarg))
-                    optarg = NULL;
+                _optarg_tmp = argv[argidx];
+                if (is_opt(_optarg_tmp))
+                    _optarg_tmp = NULL;
             }
 
-            if (_optarg != NULL)
+            if (_optarg_tmp != NULL)
                 ++*optidx;
 
             break;
         }
     }
 
-    return _optarg;
+    return _optarg_tmp;
 }
 
 int getopts(int argc, char **argv, const struct option *options, int size, int *p_optval)
