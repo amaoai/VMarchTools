@@ -8,9 +8,9 @@
 #define CMD_START       ((unsigned) 0X001F)  /* 启动服务 */
 #define CMD_STOP        ((unsigned) 0x002F)  /* 停止服务 */
 #define CMD_RESTART     ((unsigned) 0x003F)  /* 重启服务 */
-#define CMD_PS          ((unsigned) 0x004F)  /* 查看当前正在运行的所有JAVA服务信息 */
-#define CMD_CD          ((unsigned) 0x005F)  /* 进入 jar 包内部，并查看文件。pub cd exp.jar | pub cd */
-#define CMD_PACK        ((unsigned) 0x006F)  /* 将服务打包成docker镜像, pub pack docker */
+#define CMD_PS          ((unsigned) 0x004F)  /* 打印当前服务的运行状态 */
+#define CMD_EXEC        ((unsigned) 0x005F)  /* 进入 jar 包内部，并查看文件。vmarch exec exp.jar | vmarch exec */
+#define CMD_PACK        ((unsigned) 0x006F)  /* 将服务打包成docker镜像, vmarch pack docker */
 #define CMD_DUMP        ((unsigned) 0x007F)  /* 打印服务的堆栈日志一般用于排查OOM, 参数：输出文件名，默认 <服务名>.dump */
 
 #define OPT_NSD          1
