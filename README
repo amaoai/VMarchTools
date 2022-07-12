@@ -10,3 +10,6 @@ vm-arch部署工具
   - exec    进入到JAR包内部
   - pack    打包成docker镜像: vmarch pack docker
   - dump    生成dump文件
+
+@AUTHOR TIAN SHENG
+@CREATE ON 2022/7/11
