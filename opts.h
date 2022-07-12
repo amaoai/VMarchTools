@@ -4,6 +4,7 @@
 
 #define no_argument 0           /* 不需要参数 */
 #define required_argument 1     /* 需要参数, 参数使用空格分割。-cnf dev */
+#define optional_argument 2     /* 可选参数 */
 
 #define OPTERR_NO_ERR        0  /* 没有错误 */
 #define OPTERR_NO_ARGUMENT  -1  /* 没有参数错误 */
@@ -21,6 +22,7 @@ struct option {
     char short_name[10];
     int has_arg;
     int optval;
+    char comment[255];
 };
 
 /* 遍历命令行参数，并通过p_optval匹配 */
