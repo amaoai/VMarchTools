@@ -52,21 +52,40 @@ char *find_argument(int argc, char **argv, int *optidx, char *optch, const struc
 {
     char *_optarg = NULL;
 
-    /* 获取option参数 */
-    if (p_opt->has_arg) {
-        /* 因为选项参数是在当前命令的下一个位置。所以这里optidx需要+1 */
-        if ((++*optidx) < argc) {
-            _optarg = argv[*optidx];
-            /* 如果参数是option抛出错误, 因为option不能作为参数 */
-            if (is_opt(_optarg))
-                goto NO_ARGUMENT_ERROR;
+    switch (p_opt->has_arg) {
+        /* 必填参数 */
+        case required_argument: {
+            /* 因为选项参数是在当前命令的下一个位置。所以这里optidx需要+1 */
+            if ((++*optidx) < argc) {
+                _optarg = argv[*optidx];
+                /* 如果参数是option抛出错误, 因为option不能作为参数 */
+                if (is_opt(_optarg))
+                    _optarg = NULL;
+            }
 
-            return _optarg;
+            if (_optarg == NULL) {
+                opterr = OPTERR_NO_ARGUMENT;
+                printf("%s 选项需要包含参数\n", optch);
+            }
+
+            break;
         }
 
-NO_ARGUMENT_ERROR:
-        opterr = OPTERR_NO_ARGUMENT;
-        printf("%s 选项需要包含参数\n", optch);
+        /* 可选参数 */
+        case optional_argument: {
+            int argidx = *optidx + 1;
+
+            if (argidx < argc) {
+                _optarg = argv[argidx];
+                if (is_opt(_optarg))
+                    optarg = NULL;
+            }
+
+            if (_optarg != NULL)
+                ++*optidx;
+
+            break;
+        }
     }
 
     return _optarg;
