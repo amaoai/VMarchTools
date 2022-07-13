@@ -1,6 +1,20 @@
-/* AUTHOR: TIAN_SHENG, DATE: 2022/7/12 */
-#ifndef PUB_INIT_H
-#define PUB_INIT_H
+/* AUTHOR: TIAN_SHENG, DATE: 2022/7/13
+ *
+ * CMD核心头文件，包含所有命令定义以及调试工具的定义。
+ *
+ *   一段CMD的命令在 vmarch_make_cmdline(int, char **, struct vmarch_option_flags *) 函数中被解析。
+ * 解析的结果通过指针赋值到 struct vmarch_option_flags 结构体中。
+ *
+ * 在这里的命令是定义的什么（使用docker命令演示）?
+ *
+ *     比如执行一段 docker 启动容器的脚本 -> docker start <ImageID> -d
+ *                                                 ^              ^
+ *
+ * 上面的脚本中 start 就是指的命令，而 -d 是选项。
+ *
+ */
+#ifndef VMARCH_VMARCHCMD_CORE_H
+#define VMARCH_VMARCHCMD_CORE_H
 
 #include "opts.h"
 #include "tool/array.h"
@@ -74,8 +88,7 @@ static inline void vmarch_init_option_flags(struct vmarch_option_flags *flags)
     memset(flags->cp, 0, sizeof(flags->cp));
 }
 
-/* 参数 flags 指针是函数的返回结构体。
- * 而 vmarch_make_cmdline 的返回值是执行结果是否出现错误 */
+/* 参数 flags 指针是函数的返回结构体。*/
 void vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flags);
 
-#endif /* PUB_INIT_H */
+#endif /* VMARCH_VMARCHCMD_CORE_H */

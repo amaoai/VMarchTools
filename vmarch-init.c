@@ -1,5 +1,5 @@
 /* AUTHOR: TIAN_SHENG, DATE: 2022/7/11 */
-#include "init.h"
+#include "vmarchcmd.h"
 #include <stdio.h>
 
 #define VMARCH_ERROR_OUT_OF_INDEX(cmd, size, outsize) \
