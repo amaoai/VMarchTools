@@ -18,7 +18,7 @@
 
 #include "opts.h"
 #include "tool/array.h"
-#include "tool/typedef.h"
+#include "typedef.h"
 
 #include <stdio.h>
 #include <string.h>

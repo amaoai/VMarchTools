@@ -8,4 +8,10 @@
 #define TRUE 1
 #define FALSE 0
 
+#ifdef linux
+#  define _MAX_FILE_NAME 1024
+#elif WIN32
+#  define _MAX_FILE_NAME 260
+#endif
+
 #endif /* _TYPEDEF_H */

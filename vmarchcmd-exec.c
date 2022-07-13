@@ -1,5 +1,6 @@
 /* AUTHOR: TIAN_SHENG, DATE: 2022/7/13 */
 #include "vmarchcmd.h"
+#include "vmarchio.h"
 
 /* 通过宏定义去调用命令 */
 #define vmarchcmdexec(name, p_optflags) vmarchcmd_exec_##name(p_optflags)
