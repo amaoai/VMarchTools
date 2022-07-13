@@ -3,8 +3,8 @@
 #define PUB_INIT_H
 
 #include "opts.h"
-#include "vmarch/tool/array.h"
-#include "vmarch/tool/typedef.h"
+#include "tool/array.h"
+#include "tool/typedef.h"
 
 #include <string.h>
 

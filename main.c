@@ -1,7 +1,6 @@
 /* AUTHOR: TIAN_SHENG, DATE: 2022/7/11 */
 #include <stdio.h>
 #include "init.h"
-#include "cmd/start/startcmd.h"
 
 void vmarch_exec_cmd(struct vmarch_option_flags *flags)
 {
