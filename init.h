@@ -6,6 +6,8 @@
 #include "vmarch/tool/array.h"
 #include "vmarch/tool/typedef.h"
 
+#include <string.h>
+
 #define VMARCHCMD_NULL    ((unsigned) 1)       /* 没有命令 */
 #define VMARCHCMD_START   ((unsigned) 1 << 1)  /* 启动服务 */
 #define VMARCHCMD_STOP    ((unsigned) 1 << 2)  /* 停止服务 */
@@ -37,25 +39,43 @@ const static struct option VMARCH_OPTIONS[] = {
  * 请根据结构体成员名到 VMARCH_OPTIONS 去找对应的描述 */
 struct vmarch_option_flags {
     VMARCHCMD cmd;
-    BOOL      nsd;
-    char      nsd_val[255];
-    char      cp[56];
+    char      nsd[256];
+    char      cp[64];
     unsigned  port;
     unsigned  dp;
     BOOL      mon;
 };
 
+#ifdef vmarch_enable_debug
+#  define vmarch_option_flags_printf(optflag)         \
+    printf("vmarch_option_flags:\n\t"                 \
+        "cmd: %d\n\t"                                 \
+        "nsd: %s\n\t"                                 \
+        "cp: %s\n\t"                                  \
+        "port: %d\n\t"                                \
+        "dp: %d\n\t"                                  \
+        "mon: %d\n\t",                                \
+        (optflag.cmd),                                \
+        (optflag.nsd),                                \
+        (optflag.cp),                                 \
+        (optflag.port),                               \
+        (optflag.dp),                                 \
+        (optflag.mon)                                 \
+    )
+#endif
+
 /* 初始化结构体 */
 static inline void vmarch_init_option_flags(struct vmarch_option_flags *flags)
 {
-    flags->nsd = FALSE;
     flags->port = 0;
     flags->dp = 0;
     flags->mon = FALSE;
+    memset(flags->nsd, 0, sizeof(flags->nsd));
+    memset(flags->cp, 0, sizeof(flags->cp));
 }
 
 /* 参数 flags 指针是函数的返回结构体。
  * 而 vmarch_make_cmdline 的返回值是执行结果是否出现错误 */
-int vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flags);
+void vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flags);
 
 #endif /* PUB_INIT_H */

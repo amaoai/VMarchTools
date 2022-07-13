@@ -1,11 +1,11 @@
 /* AUTHOR: TIAN_SHENG, DATE: 2022/7/11 */
 #include "init.h"
-#include <string.h>
 #include <stdio.h>
 
 #define VMARCH_ERROR_OUT_OF_INDEX(cmd, size, outsize) \
     fprintf(stderr, "-ERROR 参数超出命令 %s 固定长度：%d, 参数长度：%d\n", (cmd), (size), (outsize))
 
+/* 设置string值 */
 #define VMARCH_SET_VAL(opt, arg, asize, val)                                        \
     if ((asize) > 0) {                                                              \
         if ((asize) <= sizeof((val))) {                                             \
@@ -35,7 +35,7 @@ NO_CMD:
     return VMARCHCMD_NULL;
 }
 
-int vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flags)
+void vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flags)
 {
     int         opt;
     VMARCHCMD   cmd;
@@ -50,8 +50,7 @@ int vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flags
 
         switch (opt) {
             case OPT_NSD:
-                flags->nsd = TRUE;
-                VMARCH_SET_VAL(optopt, optarg, argsize, flags->nsd_val);
+                VMARCH_SET_VAL(optopt, optarg, argsize, flags->nsd);
                 break;
             case OPT_CP:
                 VMARCH_SET_VAL(optopt, optarg, argsize, flags->cp);
@@ -67,6 +66,4 @@ int vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flags
                 break;
         }
     }
-
-    return TRUE;
 }
