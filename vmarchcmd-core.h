@@ -23,14 +23,14 @@
 #include <stdio.h>
 #include <string.h>
 
-#define VMARCHCMD_NULL    ((unsigned) 1)       /* 没有命令 */
-#define VMARCHCMD_START   ((unsigned) 1 << 1)  /* 启动服务 */
-#define VMARCHCMD_STOP    ((unsigned) 1 << 2)  /* 停止服务 */
-#define VMARCHCMD_RESTART ((unsigned) 1 << 3)  /* 重启服务 */
-#define VMARCHCMD_PS      ((unsigned) 1 << 4)  /* 打印当前服务的运行状态 */
-#define VMARCHCMD_EXEC    ((unsigned) 1 << 5)  /* 进入 jar 包内部，并查看文件。vmarch exec exp.jar | vmarch exec */
-#define VMARCHCMD_PACK    ((unsigned) 1 << 6)  /* 将服务打包成docker镜像, vmarch pack docker */
-#define VMARCHCMD_DUMP    ((unsigned) 1 << 7)  /* 打印服务的堆栈日志一般用于排查OOM, 参数：输出文件名，默认 <服务名>.dump */
+#define VMARCHCMD_NULL    0x00000000  /* 没有命令 */
+#define VMARCHCMD_START   0x00000001  /* 启动服务 */
+#define VMARCHCMD_STOP    0x00000010  /* 停止服务 */
+#define VMARCHCMD_RESTART 0x00000100  /* 重启服务 */
+#define VMARCHCMD_PS      0x00001000  /* 打印当前服务的运行状态 */
+#define VMARCHCMD_EXEC    0x00010000  /* 进入 jar 包内部，并查看文件。vmarch exec exp.jar | vmarch exec */
+#define VMARCHCMD_PACK    0x00100000  /* 将服务打包成docker镜像, vmarch pack docker */
+#define VMARCHCMD_DUMP    0x01000000  /* 打印服务的堆栈日志一般用于排查OOM, 参数：输出文件名，默认 <服务名>.dump */
 
 /* cmd类型定义 */
 #define VMARCHCMD unsigned
