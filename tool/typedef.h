@@ -1,6 +1,6 @@
 /* AUTHOR: TIAN_SHENG, DATE: 2022/7/12 */
-#ifndef PUB_TYPEDEF_H
-#define PUB_TYPEDEF_H
+#ifndef _TYPEDEF_H
+#define _TYPEDEF_H
 
 #include <stdlib.h>
 
@@ -8,4 +8,4 @@
 #define TRUE 1
 #define FALSE 0
 
-#endif /* PUB_TYPEDEF_H */
+#endif /* _TYPEDEF_H */
