@@ -12,6 +12,7 @@
             strcpy((val), (arg));                                                   \
         } else {                                                                    \
             VMARCH_ERROR_OUT_OF_INDEX(opt, sizeof((val)), (asize));                 \
+            exit(-1);                                                               \
         }                                                                           \
     }
 
