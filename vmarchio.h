@@ -3,7 +3,6 @@
 #define VMARCH_VMARCHIO_H
 
 #include "typedef.h"
-#include "os/extapi.h"
 #include <stdlib.h>
 
 /* 是不是忽略目录 . 和 .. */
