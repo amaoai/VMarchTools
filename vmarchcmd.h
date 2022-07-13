@@ -4,4 +4,7 @@
 
 #include "vmarchcmd-core.h"
 
+/* 执行命令 */
+void vmarchcmd_exec(const struct vmarch_option_flags *p_optflags);
+
 #endif /* VMARCH_CMD_INIT_H */

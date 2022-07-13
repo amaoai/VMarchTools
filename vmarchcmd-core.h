@@ -20,6 +20,7 @@
 #include "tool/array.h"
 #include "tool/typedef.h"
 
+#include <stdio.h>
 #include <string.h>
 
 #define VMARCHCMD_NULL    ((unsigned) 1)       /* 没有命令 */
@@ -60,27 +61,26 @@ struct vmarch_option_flags {
     BOOL      mon;
 };
 
-#ifdef vmarch_enable_debug
-#  define vmarch_option_flags_printf(optflag)         \
+#define vmarch_option_flags_printf(p_optflags)        \
     printf("vmarch_option_flags:\n\t"                 \
         "cmd: %d\n\t"                                 \
         "nsd: %s\n\t"                                 \
         "cp: %s\n\t"                                  \
         "port: %d\n\t"                                \
         "dp: %d\n\t"                                  \
-        "mon: %d\n\t",                                \
-        (optflag.cmd),                                \
-        (optflag.nsd),                                \
-        (optflag.cp),                                 \
-        (optflag.port),                               \
-        (optflag.dp),                                 \
-        (optflag.mon)                                 \
+        "mon: %d\n",                                  \
+        (p_optflags->cmd),                            \
+        (p_optflags->nsd),                            \
+        (p_optflags->cp),                             \
+        (p_optflags->port),                           \
+        (p_optflags->dp),                             \
+        (p_optflags->mon)                             \
     )
-#endif
 
 /* 初始化结构体 */
 static inline void vmarch_init_option_flags(struct vmarch_option_flags *flags)
 {
+    flags->cmd = 0;
     flags->port = 0;
     flags->dp = 0;
     flags->mon = FALSE;

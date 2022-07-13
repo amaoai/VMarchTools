@@ -43,7 +43,7 @@ void vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flag
     if ((cmd = has_cmd(argv)) != VMARCHCMD_NULL)
         printf("-CMD: %d\n", cmd);
 
-    flags->cmd = cmd;
+    flags->cmd |= cmd;
 
     while (getopts(argc, argv, VMARCH_OPTIONS, ARRAY_SIZE(VMARCH_OPTIONS), &opt) != -1) {
         size_t argsize = optarg != NULL ? strlen(optarg) : 0;

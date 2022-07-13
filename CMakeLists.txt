@@ -13,4 +13,5 @@ add_definitions(-Dvmarch_enable_debug)
 add_executable(${PROJECT_NAME}
         main.c
         opts.c
-        vmarchcmd-init.c)
+        vmarchcmd-init.c
+        vmarchcmd-exec.c)
