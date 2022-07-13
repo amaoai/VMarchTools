@@ -4,9 +4,10 @@
 
 int main(int argc, char **argv)
 {
-    struct vmarch_option_flags flag;
+    struct vmarch_option_flags flags;
+    vmarch_init_option_flags(&flags);
 
-    if (!vmarch_make_cmdline(argc, argv, &flag)) {
+    if (!vmarch_make_cmdline(argc, argv, &flags)) {
         // error
     }
 

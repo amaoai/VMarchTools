@@ -36,13 +36,23 @@ const static struct option VMARCH_OPTIONS[] = {
 /* 命令行参数结构体。如果不懂什么意思的话：
  * 请根据结构体成员名到 VMARCH_OPTIONS 去找对应的描述 */
 struct vmarch_option_flags {
-    VMARCHCMD cmd_flags;
+    VMARCHCMD cmd;
     BOOL      nsd;
+    char      nsd_val[255];
     char      cp[56];
     unsigned  port;
     unsigned  dp;
     BOOL      mon;
 };
+
+/* 初始化结构体 */
+static inline void vmarch_init_option_flags(struct vmarch_option_flags *flags)
+{
+    flags->nsd = FALSE;
+    flags->port = 0;
+    flags->dp = 0;
+    flags->mon = FALSE;
+}
 
 /* 参数 flags 指针是函数的返回结构体。
  * 而 vmarch_make_cmdline 的返回值是执行结果是否出现错误 */

@@ -3,6 +3,18 @@
 #include <string.h>
 #include <stdio.h>
 
+#define VMARCH_ERROR_OUT_OF_INDEX(cmd, size, outsize) \
+    fprintf(stderr, "-ERROR 参数超出命令 %s 固定长度：%d, 参数长度：%d\n", (cmd), (size), (outsize))
+
+#define VMARCH_SET_VAL(opt, arg, asize, val)                                        \
+    if ((asize) > 0) {                                                              \
+        if ((asize) <= sizeof((val))) {                                             \
+            strcpy((val), (arg));                                                   \
+        } else {                                                                    \
+            VMARCH_ERROR_OUT_OF_INDEX(opt, sizeof((val)), (asize));                 \
+        }                                                                           \
+    }
+
 VMARCHCMD has_cmd(char **argv)
 {
     char *ch_cmd = argv[1];
@@ -28,14 +40,30 @@ int vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flags
     VMARCHCMD   cmd;
 
     if ((cmd = has_cmd(argv)) != VMARCHCMD_NULL)
-        printf("CMD: %d\n", cmd);
+        printf("-CMD: %d\n", cmd);
+
+    flags->cmd = cmd;
 
     while (getopts(argc, argv, VMARCH_OPTIONS, ARRAY_SIZE(VMARCH_OPTIONS), &opt) != -1) {
+        size_t argsize = optarg != NULL ? strlen(optarg) : 0;
+
         switch (opt) {
-            case OPT_NSD: printf("--notice-shutdown %s\n", optarg); break;
-            case OPT_PORT: printf("-port %s\n", optarg); break;
-            case OPT_DEBUG_PORT: printf("--debug-port %s\n", optarg); break;
-            case OPT_MONITOR: printf("--monitor %s\n", optarg); break;
+            case OPT_NSD:
+                flags->nsd = TRUE;
+                VMARCH_SET_VAL(optopt, optarg, argsize, flags->nsd_val);
+                break;
+            case OPT_CP:
+                VMARCH_SET_VAL(optopt, optarg, argsize, flags->cp);
+                break;
+            case OPT_PORT:
+                flags->port = atoi(optarg);
+                break;
+            case OPT_DEBUG_PORT:
+                flags->dp = atoi(optarg);
+                break;
+            case OPT_MONITOR:
+                flags->mon = TRUE;
+                break;
         }
     }
 

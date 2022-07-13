@@ -2,7 +2,9 @@
 #ifndef PUB_TYPEDEF_H
 #define PUB_TYPEDEF_H
 
-#define BOOL char
+#include <stdlib.h>
+
+#define BOOL int
 #define TRUE 1
 #define FALSE 0
 
