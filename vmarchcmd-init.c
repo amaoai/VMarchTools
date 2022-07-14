@@ -1,9 +1,8 @@
 /* AUTHOR: TIAN_SHENG, DATE: 2022/7/11 */
 #include "vmarchcmd.h"
-#include <stdio.h>
 
 #define VMARCH_ERROR_OUT_OF_INDEX(cmd, size, outsize) \
-    fprintf(stderr, "-ERROR 参数超出命令 %s 固定长度：%d, 参数长度：%d\n", (cmd), (size), (outsize))
+    fprintf(stderr, "-ERROR 参数超出命令 %s 固定长度：%zu, 参数长度：%zu\n", (cmd), (size), (outsize))
 
 /* 设置string值 */
 #define VMARCH_SET_VAL(opt, arg, asize, val)                                        \

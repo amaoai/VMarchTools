@@ -20,8 +20,8 @@
 #include "tool/array.h"
 #include "typedef.h"
 
-#include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define VMARCHCMD_NULL    0x00000000  /* 没有命令 */
 #define VMARCHCMD_START   0x00000001  /* 启动服务 */

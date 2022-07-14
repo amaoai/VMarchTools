@@ -18,4 +18,5 @@ ADD_EXECUTABLE(${PROJECT_NAME}
         opts.c
         vmarchcmd-init.c
         vmarchcmd-exec.c
+        vmarchio.c
         )

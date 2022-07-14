@@ -1,6 +1,5 @@
 /* AUTHOR: TIAN_SHENG, DATE: 2022/7/11 */
 #include "vmarchcmd.h"
-#include "vmarchio.h"
 
 int main(int argc, char **argv)
 {

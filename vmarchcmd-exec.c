@@ -10,6 +10,16 @@
 void vmarchcmd_exec_start(const struct vmarch_option_flags *p_optflags)
 {
     printf("exec: -start\n");
+
+    DIR          *dir;
+    struct dirent ent;
+
+    char curwd[_MAX_FILE_NAME];
+    getcwd(curwd, sizeof(curwd));
+
+    if ((dir = opendir(curwd)) != NULL);
+
+    closedir(dir);
 }
 
 // cmdexec: (stop)
