@@ -3,6 +3,7 @@
 #define VMARCH_CMD_INIT_H
 
 #include "vmarchcmd-core.h"
+#include <string.h>
 
 /* 执行命令 */
 void vmarchcmd_exec(const struct vmarch_option_flags *p_optflags);

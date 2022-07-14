@@ -3,13 +3,12 @@
 
 int main(int argc, char **argv)
 {
-    struct vmarch_option_flags optflags;
-    vmarch_init_option_flags(&optflags);
+    struct vmarch_option_flags optflags = {};
 
     /* 初始化命令行 */
     vmarch_make_cmdline(argc, argv, &optflags);
 
-#ifdef vmarch_enable_debug
+#ifndef NDEBUG
     vmarch_option_flags_printf((&optflags));
 #endif
 

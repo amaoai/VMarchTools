@@ -19,9 +19,7 @@
 #include "opts.h"
 #include "tool/array.h"
 #include "typedef.h"
-
-#include <string.h>
-#include <stdlib.h>
+#include "vmarchio.h"
 
 #define VMARCHCMD_NULL    0x00000000  /* 没有命令 */
 #define VMARCHCMD_START   0x00000001  /* 启动服务 */
@@ -76,17 +74,6 @@ struct vmarch_option_flags {
         (p_optflags->dp),                             \
         (p_optflags->mon)                             \
     )
-
-/* 初始化结构体 */
-static inline void vmarch_init_option_flags(struct vmarch_option_flags *flags)
-{
-    flags->cmd = 0;
-    flags->port = 0;
-    flags->dp = 0;
-    flags->mon = FALSE;
-    memset(flags->nsd, 0, sizeof(flags->nsd));
-    memset(flags->cp, 0, sizeof(flags->cp));
-}
 
 /* 参数 flags 指针是函数的返回结构体。*/
 void vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flags);
