@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <dirent.h>
 
-VMARCH_API char *getcwd (char *__buf, size_t __size);
+#define _IGNORE_DIR(ch) ( (ch[0] == '.' || (ch[0] == '.' && ch[1] == '.')) \
+    && ch[2] == '\0' )
 
 #endif /* VMARCH_VMARCHIO_H */

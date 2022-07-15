@@ -7,9 +7,9 @@
 #define SHORT_OPT 1                 /* 短选项 */
 #define LONG_OPT  2                 /* 长选项 */
 
-char *optarg;
-char *optopt;
-int   opterr = OPTERR_NO_ERR;
+char *xoptarg;
+char *xoptopt;
+int   xopterr = OPTERR_NO_ERR;
 
 
 /* 0表示不是选项，1表示短选项，2表示长选项 */
@@ -64,7 +64,7 @@ char *find_argument(int argc, char **argv, int *optidx, char *optch, const struc
             }
 
             if (_optarg_tmp == NULL) {
-                opterr = OPTERR_NO_ARGUMENT;
+                xopterr = OPTERR_NO_ARGUMENT;
                 printf("%s 选项需要包含参数\n", optch);
             }
 
@@ -99,23 +99,23 @@ int getopts(int argc, char **argv, const struct option *options, int size, int *
     *p_optval = OPT_ALL;
 
     if (optidx < argc) {
-        optopt = argv[optidx];
+        xoptopt = argv[optidx];
 
         /* 判断选项类型: not opt, long opt, short opt */
-        int opttyp = is_opt(optopt);
+        int opttyp = is_opt(xoptopt);
 
         /* 如果是选项的话去匹配已经定义好的option数组 */
         if (opttyp) {
-            p_opt = find_option(optopt, opttyp, options, size);
+            p_opt = find_option(xoptopt, opttyp, options, size);
 
             if (p_opt != NULL) {
                 *p_optval = p_opt->optval;
                 /* 查找参数 */
-                optarg = find_argument(argc, argv, &optidx, optopt, p_opt);
+                xoptarg = find_argument(argc, argv, &optidx, xoptopt, p_opt);
             }
         }
 
-        if (opterr != OPTERR_NO_ERR)
+        if (xopterr != OPTERR_NO_ERR)
             return -1;
 
         return (++optidx);

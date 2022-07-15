@@ -1,8 +1,8 @@
 # AUTHOR: TIAN_SHENG, DATE: 2022/7/11
 CMAKE_MINIMUM_REQUIRED(VERSION 3.22)
-PROJECT(vmarch C)
+PROJECT(vmarch)
 
-SET(CMAKE_C_STANDARD 23)
+SET(CMAKE_CXX_STANDARD 23)
 
 # 指定编译哪个系统下的源码文件
 SET(OS_FILE_SOURCE "")
@@ -14,11 +14,11 @@ INCLUDE_DIRECTORIES(${PROJECT_NAME} include)
 ADD_DEFINITIONS(-Dvmarch_enable_debug)
 
 ADD_EXECUTABLE(${PROJECT_NAME}
-        main.c
+        main.cpp
         opts.c
-        vmarchcmd-init.c
-        vmarchcmd-exec.c
-        vmarchio.c
-        c/start.c
-        c/stop.c
+        vmarchcmd-init.cpp
+        vmarchcmd-exec.cpp
+        vmarchio.cpp
+        c/start.cpp
+        c/stop.cpp
 )

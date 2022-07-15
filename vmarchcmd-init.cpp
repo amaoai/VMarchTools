@@ -45,20 +45,20 @@ void vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flag
     flags->cmd |= cmd;
 
     while (getopts(argc, argv, VMARCH_OPTIONS, ARRAY_SIZE(VMARCH_OPTIONS), &opt) != -1) {
-        size_t argsize = optarg != NULL ? strlen(optarg) : 0;
+        size_t argsize = xoptarg != NULL ? strlen(xoptarg) : 0;
 
         switch (opt) {
             case OPT_NSD:
-                VMARCH_SET_VAL(optopt, optarg, argsize, flags->nsd);
+                VMARCH_SET_VAL(xoptopt, xoptarg, argsize, flags->nsd);
                 break;
             case OPT_CP:
-                VMARCH_SET_VAL(optopt, optarg, argsize, flags->cp);
+                VMARCH_SET_VAL(xoptopt, xoptarg, argsize, flags->cp);
                 break;
             case OPT_PORT:
-                flags->port = atoi(optarg);
+                flags->port = atoi(xoptarg);
                 break;
             case OPT_DEBUG_PORT:
-                flags->dp = atoi(optarg);
+                flags->dp = atoi(xoptarg);
                 break;
             case OPT_MONITOR:
                 flags->mon = TRUE;
