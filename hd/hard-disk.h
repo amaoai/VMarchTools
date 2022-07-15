@@ -1,0 +1,5 @@
+/* AUTHOR: TIAN_SHENG, DATE: 2022/7/15 */
+#ifndef VMARCH_HARD_DISK_H
+#define VMARCH_HARD_DISK_H
+
+#endif /* VMARCH_HARD_DISK_H */
