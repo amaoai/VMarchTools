@@ -25,6 +25,7 @@
 #define OPT_PORT         3
 #define OPT_DEBUG_PORT   4
 #define OPT_MONITOR      5
+#define OPT_XTAIL        6
 
 /* 命令的 option 列表 */
 const static struct option VMARCH_OPTIONS[] = {
@@ -33,6 +34,7 @@ const static struct option VMARCH_OPTIONS[] = {
         {"",                "port", required_argument, OPT_PORT,       "设置服务运行端口"},
         {"debug-port",      "dp",   required_argument, OPT_DEBUG_PORT, "设置远程调试端口"},
         {"monitor",         "mon",  no_argument,       OPT_MONITOR,    "监控服务运行情况"},
+        {"xtail",           "xtl",  no_argument,       OPT_MONITOR,    "运行服务并打印日志"},
 };
 
 /* 命令行参数结构体。如果不懂什么意思的话：
@@ -41,9 +43,10 @@ struct vmarch_option_flags {
     VMARCHCMD cmd;
     char      nsd[256];
     char      cp[64];
-    unsigned  port;
-    unsigned  dp;
+    char      port[5];
+    char      dp[5];
     BOOL      mon;
+    BOOL      xtl;
 };
 
 #define vmarch_option_flags_printf(p_optflags)        \
@@ -51,8 +54,8 @@ struct vmarch_option_flags {
         "cmd: %d\n\t"                                 \
         "nsd: %s\n\t"                                 \
         "cp: %s\n\t"                                  \
-        "port: %d\n\t"                                \
-        "dp: %d\n\t"                                  \
+        "port: %s\n\t"                                \
+        "dp: %s\n\t"                                  \
         "mon: %d\n",                                  \
         (p_optflags->cmd),                            \
         (p_optflags->nsd),                            \

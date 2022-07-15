@@ -5,7 +5,7 @@
     fprintf(stderr, "-ERROR 参数超出命令 %s 固定长度：%zu, 参数长度：%zu\n", (cmd), (size), (outsize))
 
 /* 设置string值 */
-#define VMARCH_SET_VAL(opt, arg, asize, val)                                        \
+#define VMARCH_SET_CHR(opt, arg, asize, val)                                        \
     if ((asize) > 0) {                                                              \
         if ((asize) <= sizeof((val))) {                                             \
             strcpy((val), (arg));                                                   \
@@ -14,6 +14,9 @@
             exit(-1);                                                               \
         }                                                                           \
     }
+
+/* 设置bool值 */
+#define VMARCH_SET_BOOL(val) ( val = TRUE )
 
 VMARCHCMD has_cmd(char **argv)
 {
@@ -39,30 +42,19 @@ void vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flag
     int         opt;
     VMARCHCMD   cmd;
 
-    if ((cmd = has_cmd(argv)) != VMARCHCMD_NULL)
-        printf("-CMD: %d\n", cmd);
-
+    cmd = has_cmd(argv);
     flags->cmd |= cmd;
 
     while (getopts(argc, argv, VMARCH_OPTIONS, ARRAY_SIZE(VMARCH_OPTIONS), &opt) != -1) {
         size_t argsize = xoptarg != NULL ? strlen(xoptarg) : 0;
 
         switch (opt) {
-            case OPT_NSD:
-                VMARCH_SET_VAL(xoptopt, xoptarg, argsize, flags->nsd);
-                break;
-            case OPT_CP:
-                VMARCH_SET_VAL(xoptopt, xoptarg, argsize, flags->cp);
-                break;
-            case OPT_PORT:
-                flags->port = atoi(xoptarg);
-                break;
-            case OPT_DEBUG_PORT:
-                flags->dp = atoi(xoptarg);
-                break;
-            case OPT_MONITOR:
-                flags->mon = TRUE;
-                break;
+            case OPT_NSD: VMARCH_SET_CHR(xoptopt, xoptarg, argsize, flags->nsd); break;
+            case OPT_CP: VMARCH_SET_CHR(xoptopt, xoptarg, argsize, flags->cp); break;
+            case OPT_PORT: VMARCH_SET_CHR(xoptopt, xoptarg, argsize, flags->port); break;
+            case OPT_DEBUG_PORT: VMARCH_SET_CHR(xoptopt, xoptarg, argsize, flags->dp); break;
+            case OPT_XTAIL: VMARCH_SET_BOOL(flags->xtl); break;
+            case OPT_MONITOR: VMARCH_SET_BOOL(flags->mon); break;
         }
     }
 }

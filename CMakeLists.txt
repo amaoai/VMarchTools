@@ -19,6 +19,7 @@ ADD_EXECUTABLE(${PROJECT_NAME}
         vmarchcmd-init.cpp
         vmarchcmd-exec.cpp
         vmarchio.cpp
+        systemctl.c
         c/start.cpp
         c/stop.cpp
 )

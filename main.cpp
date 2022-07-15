@@ -9,7 +9,7 @@ int main(int argc, char **argv)
     vmarch_make_cmdline(argc, argv, &optflags);
 
 #ifndef NDEBUG
-    vmarch_option_flags_printf((&optflags));
+//    vmarch_option_flags_printf((&optflags));
 #endif
 
     /* 执行命令 */
