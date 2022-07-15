@@ -34,7 +34,7 @@ const static struct option VMARCH_OPTIONS[] = {
         {"",                "port", required_argument, OPT_PORT,       "设置服务运行端口"},
         {"debug-port",      "dp",   required_argument, OPT_DEBUG_PORT, "设置远程调试端口"},
         {"monitor",         "mon",  no_argument,       OPT_MONITOR,    "监控服务运行情况"},
-        {"xtail",           "xtl",  no_argument,       OPT_MONITOR,    "运行服务并打印日志"},
+        {"xtail",           "xtl",  no_argument,       OPT_XTAIL,      "运行服务并打印日志"},
 };
 
 /* 命令行参数结构体。如果不懂什么意思的话：

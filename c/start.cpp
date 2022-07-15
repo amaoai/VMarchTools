@@ -6,7 +6,7 @@
 #include "systemctl.h"
 
 /* 遍历当前工作空间 */
-void iter_getcwd_files(std::vector<std::string> *cwdfvec)
+void _iter_getcwd_files(std::vector<std::string> *cwdfvec)
 {
     DIR *dir;
     struct dirent *ent;
@@ -27,7 +27,7 @@ void iter_getcwd_files(std::vector<std::string> *cwdfvec)
 }
 
 /* 构建Java运行命令 */
-std::string build_run_cmd(const std::string &server, const struct vmarch_option_flags *p_optflags)
+void _execcmd_run_JVM(const std::string &server, const struct vmarch_option_flags *p_optflags)
 {
     std::string runcmd = "nohup java";
 
@@ -39,7 +39,18 @@ std::string build_run_cmd(const std::string &server, const struct vmarch_option_
     if (!striempty(p_optflags->cp))
         runcmd = runcmd + " --spring.profiles.active=" +  p_optflags->cp;
 
-    return runcmd + " > logs.vmarch 2>&1 &";
+    runcmd += " > logs.vmarch 2>&1 &";
+
+    systemctl_exec_cmd(runcmd.c_str());
+}
+
+/* 打印日志 */
+void _execcmd_run_xtl(const std::string &server, const struct vmarch_option_flags *p_optflags)
+{
+    // cmdexec: (-tail)
+    // ================
+    if (p_optflags->xtl)
+        systemctl_exec_cmd("tail -f logs.vmarch");
 }
 
 // cmdexec: (start)
@@ -47,7 +58,7 @@ std::string build_run_cmd(const std::string &server, const struct vmarch_option_
 void vmarchcmd_exec_start(const struct vmarch_option_flags *p_optflags)
 {
     std::vector<std::string> cwdfvec;       /* 当前工作目录下的所有文件名 */
-    iter_getcwd_files(&cwdfvec);
+    _iter_getcwd_files(&cwdfvec);
 
     // 查找 .jar 结尾的文件名
     std::vector<std::string> jarpacks;
@@ -76,5 +87,6 @@ void vmarchcmd_exec_start(const struct vmarch_option_flags *p_optflags)
     }
 
     /* 执行 Java 启动命令 */
-    systemctl_exec_cmd(build_run_cmd(service, p_optflags).c_str());
+    _execcmd_run_JVM(service, p_optflags);
+    _execcmd_run_xtl(service, p_optflags);
 }
