@@ -16,10 +16,15 @@ ADD_DEFINITIONS(-Dvmarch_enable_debug)
 ADD_EXECUTABLE(${PROJECT_NAME}
         main.cpp
         opts.c
+        systemctl.c
         vmarchcmd-init.cpp
         vmarchcmd-exec.cpp
         vmarchio.cpp
-        systemctl.c
         c/start.cpp
         c/stop.cpp
+        c/restart.cpp
+        c/exec.cpp
+        c/pak.cpp
+        c/ps.cpp
+        c/dump.cpp
 )

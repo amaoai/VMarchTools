@@ -30,7 +30,7 @@ VMARCHCMD has_cmd(char **argv)
     if (strcmp(ch_cmd, "restart") == 0) return VMARCHCMD_RESTART;
     if (strcmp(ch_cmd, "ps") == 0) return VMARCHCMD_PS;
     if (strcmp(ch_cmd, "exec") == 0) return VMARCHCMD_EXEC;
-    if (strcmp(ch_cmd, "pack") == 0) return VMARCHCMD_PACK;
+    if (strcmp(ch_cmd, "pak") == 0) return VMARCHCMD_PAK;
     if (strcmp(ch_cmd, "dump") == 0) return VMARCHCMD_DUMP;
 
 NO_CMD:

@@ -7,6 +7,11 @@
 
 VMARCH_API VMARCH_DEFINE_CMD_CALL(start);
 VMARCH_API VMARCH_DEFINE_CMD_CALL(stop);
+VMARCH_API VMARCH_DEFINE_CMD_CALL(restart);
+VMARCH_API VMARCH_DEFINE_CMD_CALL(ps);
+VMARCH_API VMARCH_DEFINE_CMD_CALL(dump);
+VMARCH_API VMARCH_DEFINE_CMD_CALL(exec);
+VMARCH_API VMARCH_DEFINE_CMD_CALL(pak);
 
 /* 通过宏定义去调用命令 */
 #define vmarch_cmd_exec(name, p_optflags) vmarchcmd_exec_##name(p_optflags)
@@ -19,4 +24,19 @@ void vmarchcmd_exec(const struct vmarch_option_flags *p_optflags)
 
     if (p_optflags->cmd & VMARCHCMD_STOP)
         vmarch_cmd_exec(stop, p_optflags);
+
+    if (p_optflags->cmd & VMARCHCMD_RESTART)
+        vmarch_cmd_exec(restart, p_optflags);
+
+    if (p_optflags->cmd & VMARCHCMD_PS)
+        vmarch_cmd_exec(ps, p_optflags);
+
+    if (p_optflags->cmd & VMARCHCMD_DUMP)
+        vmarch_cmd_exec(dump, p_optflags);
+
+    if (p_optflags->cmd & VMARCHCMD_EXEC)
+        vmarch_cmd_exec(exec, p_optflags);
+
+    if (p_optflags->cmd & VMARCHCMD_PAK)
+        vmarch_cmd_exec(pak, p_optflags);
 }
