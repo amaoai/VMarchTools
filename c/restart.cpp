@@ -1,4 +1,5 @@
 /* AUTHOR: TIAN_SHENG, DATE: 2022/7/15 */
+#include "vmarchcmd.h"
 
 // cmdexec: (restart)
 // ================
