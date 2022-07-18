@@ -37,7 +37,8 @@ VMARCHCMD has_cmd(char **argv)
     if (strcmp(ch_cmd, "version") == 0) return VMARCHCMD_VERSION;
 
 NO_CMD:
-    throw std::runtime_error((std::string("unknown cmd: ") + ch_cmd));
+    printf("未知命令：%s\n", ch_cmd);
+    exit(-1);
 }
 
 void vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flags)
