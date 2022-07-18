@@ -6,6 +6,7 @@
 #include "tool/array.h"
 #include "typedef.h"
 #include "vmarchio.h"
+#include <string>
 #include <string.h>
 
 #define BIT(x) 1 << (x)
@@ -71,10 +72,7 @@ struct vmarch_option_flags {
         (p_optflags->mon)                             \
     )
 
-/* 参数 flags 指针是函数的返回结构体。*/
-void vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flags);
-
-/* 执行命令 */
-void vmarchcmd_exec(const struct vmarch_option_flags *p_optflags);
+void vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flags); /* 参数 flags 指针是函数的返回结构体。*/
+void vmarchcmd_exec(const struct vmarch_option_flags *p_optflags); /* 执行命令 */
 
 #endif /* VMARCH_CMD_INIT_H */

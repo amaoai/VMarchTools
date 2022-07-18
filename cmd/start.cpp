@@ -40,7 +40,7 @@ void _execcmd_run_JVM(const std::string &server, const struct vmarch_option_flag
     if (!striempty(p_optflags->cp))
         runcmd = runcmd + " --spring.profiles.active=" +  p_optflags->cp;
 
-    runcmd += " > logs.vmarch 2>&1 &";
+    runcmd += " > log.arch.tmp 2>&1 &";
 
     pcmdexec(runcmd.c_str());
 }
@@ -51,7 +51,7 @@ void _execcmd_run_xtl(const std::string &server, const struct vmarch_option_flag
     // cmdexec: (-tail)
     // ================
     if (p_optflags->xtl)
-        pcmdexec("tail -f logs.vmarch");
+        pcmdexec("tail -f log.arch.tmp");
 }
 
 // cmdexec: (start)
