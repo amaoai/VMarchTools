@@ -19,6 +19,7 @@ ADD_EXECUTABLE(${PROJECT_NAME}
         vmarchio.cpp
         jarfind.cpp
         cmd/start.cpp
+        cmd/restart.cpp
         cmd/stop.cpp
         cmd/exec.cpp
         cmd/pak.cpp

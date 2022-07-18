@@ -26,10 +26,8 @@ void vmarchcmd_exec(const struct vmarch_option_flags *p_optflags)
     if (p_optflags->cmd & VMARCHCMD_STOP)
         vmarch_cmd_exec(stop, p_optflags);
 
-    if (p_optflags->cmd & VMARCHCMD_RESTART) {
-        vmarch_cmd_exec(stop, p_optflags);
-        vmarch_cmd_exec(start, p_optflags);
-    }
+    if (p_optflags->cmd & VMARCHCMD_RESTART)
+        vmarch_cmd_exec(restart, p_optflags);
 
     if (p_optflags->cmd & VMARCHCMD_PS)
         vmarch_cmd_exec(ps, p_optflags);

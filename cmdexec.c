@@ -8,6 +8,8 @@ int rcmdexec(const char *__Cmd, char *__Buf, size_t __BufSiz)
     FILE *fp;
     char tmpbuf[1024];
 
+    printf("[CMD] - %s\n", __Cmd);
+
     if ((fp = popen(__Cmd, "r")) != NULL) {
         while (fgets(tmpbuf, sizeof(tmpbuf), fp) != NULL) {
             strcat(__Buf, tmpbuf);
@@ -25,6 +27,8 @@ int pcmdexec(const char *__Cmd)
 {
     FILE *fp;
     char tmpbuf[1024];
+
+    printf("[CMD] - %s\n", __Cmd);
 
     if ((fp = popen(__Cmd, "r")) != NULL) {
         while (fgets(tmpbuf, sizeof(tmpbuf), fp) != NULL)
