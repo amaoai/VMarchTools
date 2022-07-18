@@ -1,6 +1,8 @@
 /* AUTHOR: TIAN_SHENG, DATE: 2022/7/11 */
 #include "vmarchcmd.h"
 
+#include <stdexcept>
+
 #define VMARCH_ERROR_OUT_OF_INDEX(cmd, size, outsize) \
     fprintf(stderr, "-ERROR 参数超出命令 %s 固定长度：%zu, 参数长度：%zu\n", (cmd), (size), (outsize))
 
@@ -35,7 +37,7 @@ VMARCHCMD has_cmd(char **argv)
     if (strcmp(ch_cmd, "version") == 0) return VMARCHCMD_VERSION;
 
 NO_CMD:
-    return VMARCHCMD_NULL;
+    throw std::runtime_error((std::string("unknown cmd: ") + ch_cmd));
 }
 
 void vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flags)

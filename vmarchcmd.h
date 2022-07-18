@@ -8,8 +8,7 @@
 #include "vmarchio.h"
 #include "cmdexec.h"
 
-#include <string>
-#include <string.h>
+#include <cstring>
 
 
 #define BIT(x) 1 << (x)
