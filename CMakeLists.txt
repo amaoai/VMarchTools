@@ -1,11 +1,8 @@
 # AUTHOR: TIAN_SHENG, DATE: 2022/7/11
-CMAKE_MINIMUM_REQUIRED(VERSION 3.22)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.23)
 PROJECT(vmarch)
 
 SET(CMAKE_CXX_STANDARD 23)
-
-# 指定编译哪个系统下的源码文件
-SET(OS_FILE_SOURCE "")
 
 INCLUDE_DIRECTORIES(${PROJECT_NAME} .)
 INCLUDE_DIRECTORIES(${PROJECT_NAME} include)
@@ -27,4 +24,5 @@ ADD_EXECUTABLE(${PROJECT_NAME}
         cmd/pak.cpp
         cmd/ps.cpp
         cmd/dump.cpp
+        cmd/version.cpp
 )

@@ -32,6 +32,7 @@ VMARCHCMD has_cmd(char **argv)
     if (strcmp(ch_cmd, "exec") == 0) return VMARCHCMD_EXEC;
     if (strcmp(ch_cmd, "pak") == 0) return VMARCHCMD_PAK;
     if (strcmp(ch_cmd, "dump") == 0) return VMARCHCMD_DUMP;
+    if (strcmp(ch_cmd, "version") == 0) return VMARCHCMD_VERSION;
 
 NO_CMD:
     return VMARCHCMD_NULL;
@@ -55,6 +56,7 @@ void vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flag
             case OPT_DEBUG_PORT: VMARCH_SET_CHR(xoptopt, xoptarg, argsize, flags->dp); break;
             case OPT_XTAIL: VMARCH_SET_BOOL(flags->xtl); break;
             case OPT_MONITOR: VMARCH_SET_BOOL(flags->mon); break;
+            case OPT_VERSION: VMARCH_SET_BOOL(flags->v); break;
         }
     }
 }
