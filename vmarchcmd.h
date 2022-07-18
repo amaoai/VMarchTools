@@ -47,6 +47,7 @@ const static struct option VMARCH_OPTIONS[] = {
  * 请根据结构体成员名到 VMARCH_OPTIONS 去找对应的描述 */
 struct vmarch_option_flags {
     VMARCHCMD cmd;
+    char      pcmd[256]; /* cmd参数 */
     char      nsd[256];
     char      cp[64];
     char      port[5];

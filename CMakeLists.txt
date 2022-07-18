@@ -17,6 +17,7 @@ ADD_EXECUTABLE(${PROJECT_NAME}
         vmarchcmd-init.cpp
         vmarchcmd-exec.cpp
         vmarchio.cpp
+        jarfind.cpp
         cmd/start.cpp
         cmd/stop.cpp
         cmd/restart.cpp
