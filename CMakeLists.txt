@@ -20,7 +20,6 @@ ADD_EXECUTABLE(${PROJECT_NAME}
         jarfind.cpp
         cmd/start.cpp
         cmd/stop.cpp
-        cmd/restart.cpp
         cmd/exec.cpp
         cmd/pak.cpp
         cmd/ps.cpp

@@ -13,10 +13,13 @@ void vmarchcmd_exec_stop(const struct vmarch_option_flags *p_optflags)
     char __Buf[0x2FF0];
     rcmdexec(("vmarch ps | grep " + jarfile).c_str(), __Buf, sizeof(__Buf));
 
-    std::string pid(__Buf);
-    std::remove(pid.begin(), pid.end(), ' ');
-    pid = pid.substr(1, pid.find("]") - 1);
+    if (!striempty(__Buf)) {
+        std::string pid(__Buf);
+        std::remove(pid.begin(), pid.end(), ' ');
+        pid = pid.substr(1, pid.find("]") - 1);
 
-    printf("%s%s%s", VMARCH_COLOR_BG_RED, __Buf, VMARCH_COLOR_RESET);
-    pcmdexec(("kill -9 " + pid).c_str());
+        printf("%s%s%s", VMARCH_COLOR_RED, __Buf, VMARCH_COLOR_RESET);
+        pcmdexec(("kill -9 " + pid).c_str());
+    }
+
 }
