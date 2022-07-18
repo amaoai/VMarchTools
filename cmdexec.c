@@ -16,7 +16,8 @@ int __fcmdexec(const char *cmd, __func_read_buf __FuncReadBuf)
 
     if ((fp = popen(cmd, "r")) != NULL) {
         while (fgets(tmpbuf, sizeof(tmpbuf), fp) != NULL)
-            __FuncReadBuf(tmpbuf);
+            if (__FuncReadBuf != NULL)
+                __FuncReadBuf(tmpbuf);
 
         pclose(fp);
 
