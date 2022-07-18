@@ -48,7 +48,7 @@ void vmarchcmd_exec_ps(const struct vmarch_option_flags *p_optflags)
                 pid.insert(0, " ");
         }
 
-        printf("PID[%s%s%s] - %s\n",
+        printf("[%s%s%s] - %s\n",
                VMARCH_COLOR_GREEN,
                pid.c_str(),
                VMARCH_COLOR_RESET,
