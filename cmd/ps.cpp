@@ -22,6 +22,10 @@ void find_java_proc(std::unordered_map<std::string, std::string> *procmap)
         size_t pos = line.find(" ");
         std::string pid = line.substr(0, pos);
         std::string name = line.substr(pos + 1, line.size());
+
+        if (name == "sun.tools.jps.Jps")
+            continue;
+
         procmap->insert(std::pair<std::string, std::string>(name, pid));
     }
 }
