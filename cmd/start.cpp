@@ -4,7 +4,7 @@
 #include <vector>
 #include <unistd.h>
 #include <iostream>
-#include "systemctl.h"
+#include "cmdexec.h"
 
 /* 遍历当前工作空间 */
 void _iter_getcwd_files(std::vector<std::string> *cwdfvec)
@@ -42,7 +42,7 @@ void _execcmd_run_JVM(const std::string &server, const struct vmarch_option_flag
 
     runcmd += " > logs.vmarch 2>&1 &";
 
-    systemctl_exec_cmd(runcmd.c_str());
+    pcmdexec(runcmd.c_str());
 }
 
 /* 打印日志 */
@@ -51,7 +51,7 @@ void _execcmd_run_xtl(const std::string &server, const struct vmarch_option_flag
     // cmdexec: (-tail)
     // ================
     if (p_optflags->xtl)
-        systemctl_exec_cmd("tail -f logs.vmarch");
+        pcmdexec("tail -f logs.vmarch");
 }
 
 // cmdexec: (start)
