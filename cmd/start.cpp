@@ -1,9 +1,6 @@
 /* AUTHOR: TIAN_SHENG, DATE: 2022/7/13 */
 #include "vmarchcmd.h"
-
 #include "jarfind.h"
-#include "cmdexec.h"
-
 
 /* 构建Java运行命令 */
 void _execcmd_run_JVM(const std::string &server, const struct vmarch_option_flags *p_optflags)

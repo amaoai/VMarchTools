@@ -1,23 +1,17 @@
 /* AUTHOR: TIAN_SHENG, DATE: 2022/7/15 */
 #include "cmdexec.h"
 
-#include <malloc.h>
 #include <string.h>
 
-char *_buf;
-
-int __fcmdexec(const char *cmd, __func_read_buf __FuncReadBuf)
+int rcmdexec(const char *__Cmd, char *__Buf, size_t __BufSiz)
 {
     FILE *fp;
-    char tmpbuf[2048];
+    char tmpbuf[1024];
 
-    static unsigned seq = -1;
-    printf("[%d] - %s\n", (++seq), cmd);
-
-    if ((fp = popen(cmd, "r")) != NULL) {
-        while (fgets(tmpbuf, sizeof(tmpbuf), fp) != NULL)
-            if (__FuncReadBuf != NULL)
-                __FuncReadBuf(tmpbuf);
+    if ((fp = popen(__Cmd, "r")) != NULL) {
+        while (fgets(tmpbuf, sizeof(tmpbuf), fp) != NULL) {
+            strcat(__Buf, tmpbuf);
+        }
 
         pclose(fp);
 
@@ -27,16 +21,19 @@ int __fcmdexec(const char *cmd, __func_read_buf __FuncReadBuf)
     return -1;
 }
 
-void __read_buf(const char *rbuf)
+int pcmdexec(const char *__Cmd)
 {
-    strcat(_buf, rbuf);
-}
+    FILE *fp;
+    char tmpbuf[1024];
 
-void rcmdexec(const char *__Cmd, char *__Buf, size_t __BufSiz)
-{
-    _buf = (char *) malloc(__BufSiz);
-    __fcmdexec(__Cmd, __read_buf);
-    strcpy(__Buf, _buf);
-    free(_buf);
-    _buf = NULL;
+    if ((fp = popen(__Cmd, "r")) != NULL) {
+        while (fgets(tmpbuf, sizeof(tmpbuf), fp) != NULL)
+            printf("%s", tmpbuf);
+
+        pclose(fp);
+
+        return 0;
+    }
+
+    return -1;
 }

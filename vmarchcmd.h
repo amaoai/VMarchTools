@@ -6,8 +6,11 @@
 #include "tool/array.h"
 #include "typedef.h"
 #include "vmarchio.h"
+#include "cmdexec.h"
+
 #include <string>
 #include <string.h>
+
 
 #define BIT(x) 1 << (x)
 

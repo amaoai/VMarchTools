@@ -1,7 +1,6 @@
 /* AUTHOR: TIAN_SHENG, DATE: 2022/7/15 */
 #include "vmarchcmd.h"
 
-#include "cmdexec.h"
 #include "color.h"
 #include <sstream>
 #include <unordered_map>
@@ -48,10 +47,8 @@ void vmarchcmd_exec_ps(const struct vmarch_option_flags *p_optflags)
                 pid.insert(0, " ");
         }
 
-        printf("[%s%s%s] - %s\n",
-               VMARCH_COLOR_GREEN,
+        printf("[%s] - %s\n",
                pid.c_str(),
-               VMARCH_COLOR_RESET,
                entry.first.c_str());
     }
 

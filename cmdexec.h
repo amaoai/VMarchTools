@@ -8,14 +8,8 @@
 extern "C" {
 #endif
 
-typedef void (*__func_read_buf)(const char *__Buf);
-static inline void __DefCallbackPrintBuf(const char *__Buf)
-  { printf("%s", __Buf); }
-/* 执行命令行 */
-int __fcmdexec(const char *, __func_read_buf);
-#define ncmdexec(__Cmd) __fcmdexec((__Cmd), NULL)                    /* 执行命令但不打印 */
-#define pcmdexec(__Cmd) __fcmdexec((__Cmd), __DefCallbackPrintBuf)   /* 执行命令并打印缓冲 */
-void rcmdexec(const char *__Cmd, char *__Buf, size_t __BufSiz);      /* 执行命令并获取执行后的命令行缓冲 */
+int rcmdexec(const char *__Cmd, char *__Buf, size_t __BufSiz); /* 执行命令并获取执行后的命令行缓冲 */
+int pcmdexec(const char *__Cmd); /* 执行命令并打印 */
 
 #ifdef __cplusplus
 };
