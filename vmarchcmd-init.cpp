@@ -20,10 +20,8 @@
 /* 设置bool值 */
 #define VMARCH_SET_BOOL(val) ( val = TRUE )
 
-VMARCHCMD has_cmd(char **argv)
+VMARCHCMD has_cmd(const char *ch_cmd)
 {
-    char *ch_cmd = argv[1];
-
     if (ch_cmd == NULL)
         goto NO_CMD;
 
@@ -34,11 +32,9 @@ VMARCHCMD has_cmd(char **argv)
     if (strcmp(ch_cmd, "exec") == 0) return VMARCHCMD_EXEC;
     if (strcmp(ch_cmd, "pak") == 0) return VMARCHCMD_PAK;
     if (strcmp(ch_cmd, "dump") == 0) return VMARCHCMD_DUMP;
-    if (strcmp(ch_cmd, "version") == 0) return VMARCHCMD_VERSION;
 
 NO_CMD:
-    printf("未知命令：%s\n", ch_cmd);
-    exit(-1);
+    return VMARCHCMD_NULL;
 }
 
 void vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flags)
@@ -46,7 +42,8 @@ void vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flag
     int         opt;
     VMARCHCMD   cmd;
 
-    cmd = has_cmd(argv);
+    char *ch_cmd = argv[1];
+    cmd = has_cmd(ch_cmd);
     flags->cmd |= cmd;
 
     while (getopts(argc, argv, VMARCH_OPTIONS, ARRAY_SIZE(VMARCH_OPTIONS), &opt) != -1) {
@@ -62,4 +59,10 @@ void vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flag
             case OPT_VERSION: VMARCH_SET_BOOL(flags->v); break;
         }
     }
+
+    if (cmd == VMARCHCMD_NULL && !flags->v) {
+        printf("未知命令：%s\n", ch_cmd);
+        exit(-1);
+    }
+
 }

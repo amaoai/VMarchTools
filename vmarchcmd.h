@@ -21,7 +21,6 @@
 #define VMARCHCMD_EXEC    BIT(5)  /* 进入 jar 包内部，并查看文件。vmarch exec exp.jar | vmarch exec */
 #define VMARCHCMD_PAK     BIT(6)  /* 将服务打包成docker镜像, vmarch pack docker */
 #define VMARCHCMD_DUMP    BIT(7)  /* 打印服务的堆栈日志一般用于排查OOM, 参数：输出文件名，默认 <服务名>.dump */
-#define VMARCHCMD_VERSION BIT(8)  /* 打印版本号 */
 
 /* cmd类型定义 */
 #define VMARCHCMD unsigned
