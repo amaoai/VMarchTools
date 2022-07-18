@@ -3,7 +3,6 @@
 
 #include "jarfind.h"
 #include "cmdexec.h"
-#include <iostream>
 
 
 /* 构建Java运行命令 */
