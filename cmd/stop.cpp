@@ -17,6 +17,6 @@ void vmarchcmd_exec_stop(const struct vmarch_option_flags *p_optflags)
     std::remove(pid.begin(), pid.end(), ' ');
     pid = pid.substr(1, pid.find("]") - 1);
 
-    printf("%s", __Buf);
+    printf("%s%s%s", VMARCH_COLOR_BG_RED, __Buf, VMARCH_COLOR_RESET);
     pcmdexec(("kill -9 " + pid).c_str());
 }
