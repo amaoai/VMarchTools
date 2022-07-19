@@ -14,6 +14,7 @@ ADD_EXECUTABLE(${PROJECT_NAME}
         main.cpp
         opts.c
         cmdexec.c
+        platfrom/linux/proc.c
         vmarchcmd-init.cpp
         vmarchcmd-exec.cpp
         vmarchio.cpp

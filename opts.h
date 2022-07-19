@@ -17,9 +17,9 @@ extern "C" {
 
 #define OPT_ALL     ('*')       /* 匹配所有 */
 
-VMARCH_API char *xoptarg;       /* 当前命令行的参数内容 */
-VMARCH_API char *xoptopt;       /* 当前命令行opt内容 */
-VMARCH_API int   xopterr;       /* 错误代码 */
+__VMARCH_API char *xoptarg;       /* 当前命令行的参数内容 */
+__VMARCH_API char *xoptopt;       /* 当前命令行opt内容 */
+__VMARCH_API int   xopterr;       /* 错误代码 */
 
 /* 通过构建option结构体来解析命令行参数
  * 像这样: static const struct option options[] = {} */
@@ -32,7 +32,7 @@ struct option {
 };
 
 /* 遍历命令行参数，并通过p_optval匹配 */
-VMARCH_API int getopts(int argc, char **argv, const struct option *options, int size, int *p_optval);
+__VMARCH_API int getopts(int argc, char **argv, const struct option *options, int size, int *p_optval);
 
 #ifdef __cplusplus
 }

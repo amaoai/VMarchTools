@@ -2,7 +2,7 @@
 #ifndef _TYPEDEF_H
 #define _TYPEDEF_H
 
-#define VMARCH_API extern
+#define __VMARCH_API extern
 
 #define BOOL int
 #define TRUE 1
