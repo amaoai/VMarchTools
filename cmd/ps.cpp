@@ -4,7 +4,6 @@
 #include "color.h"
 #include <sstream>
 #include <unordered_map>
-#include "proc/proc.h"
 
 #define PID_SPACE_SIZE 10
 

@@ -4,7 +4,7 @@ PROJECT(vmarch)
 
 SET(CMAKE_CXX_STANDARD 23)
 
-INCLUDE_DIRECTORIES(${PROJECT_NAME} . cmdexec opts proc)
+INCLUDE_DIRECTORIES(${PROJECT_NAME} . cmdexec opts)
 
 # 添加宏定义
 ADD_DEFINITIONS(-Dvmarch_enable_debug)
