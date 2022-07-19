@@ -11,7 +11,7 @@ void vmarchcmd_exec_stop(const struct vmarch_option_flags *p_optflags)
     std::string jarfile = vmarch_getcwd_jarfile();
 
     char __Buf[0x2FF0];
-    rcmdexec(("vmarch ps | grep " + jarfile).c_str(), __Buf, sizeof(__Buf));
+    rcmdexec(("vmarch ps | grep " + jarfile).c_str(), __Buf);
 
     if (!striempty(__Buf)) {
         std::string pid(__Buf);

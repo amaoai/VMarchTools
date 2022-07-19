@@ -12,7 +12,7 @@
 void find_java_proc(std::unordered_map<std::string, std::string> *procmap)
 {
     char cmdbuf[0xFFFF];
-    rcmdexec("jps -l", cmdbuf, sizeof(cmdbuf));
+    rcmdexec("jps -l", cmdbuf);
 
     std::stringstream buf_stream(cmdbuf);
     std::string line;
@@ -47,7 +47,7 @@ void vmarchcmd_exec_ps(const struct vmarch_option_flags *p_optflags)
                 pid.insert(0, " ");
         }
 
-        printf("[%s] - %s\n",
+        printf("[%s] [PORT] %s\n",
                pid.c_str(),
                entry.first.c_str());
     }

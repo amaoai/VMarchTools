@@ -54,13 +54,14 @@ void vmarch_make_cmdline(int argc, char **argv, struct vmarch_option_flags *flag
             case OPT_CP: VMARCH_SET_CHR(xoptopt, xoptarg, argsize, flags->cp); break;
             case OPT_PORT: VMARCH_SET_CHR(xoptopt, xoptarg, argsize, flags->port); break;
             case OPT_DEBUG_PORT: VMARCH_SET_CHR(xoptopt, xoptarg, argsize, flags->dp); break;
+            case OPT_SHOW_PORT: VMARCH_SET_CHR(xoptopt, xoptarg, argsize, flags->sp); break;
             case OPT_XTAIL: VMARCH_SET_BOOL(flags->xtl); break;
             case OPT_MONITOR: VMARCH_SET_BOOL(flags->mon); break;
             case OPT_VERSION: VMARCH_SET_BOOL(flags->v); break;
         }
     }
 
-    if (cmd == VMARCHCMD_NULL && !flags->v) {
+    if (cmd == VMARCHCMD_NULL && !flags->v && striempty(flags->sp)) {
         printf("未知命令：%s\n", ch_cmd);
         exit(-1);
     }

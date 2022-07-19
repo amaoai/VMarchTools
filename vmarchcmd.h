@@ -23,6 +23,8 @@
 #define VMARCHCMD_PAK     BIT(6)  /* 将服务打包成docker镜像, vmarch pack docker */
 #define VMARCHCMD_DUMP    BIT(7)  /* 打印服务的堆栈日志一般用于排查OOM, 参数：输出文件名，默认 <服务名>.dump */
 
+#define PORT_SIZE 8
+
 /* cmd类型定义 */
 #define VMARCHCMD unsigned
 
@@ -33,6 +35,7 @@
 #define OPT_MONITOR      5
 #define OPT_XTAIL        6
 #define OPT_VERSION      7
+#define OPT_SHOW_PORT    8
 
 /* 命令的 option 列表 */
 const static struct option VMARCH_OPTIONS[] = {
@@ -42,6 +45,7 @@ const static struct option VMARCH_OPTIONS[] = {
         {"debug-port",      "dp",   required_argument, OPT_DEBUG_PORT, "设置远程调试端口"},
         {"monitor",         "mon",  no_argument,       OPT_MONITOR,    "监控服务运行情况"},
         {"xtail",           "xtl",  no_argument,       OPT_XTAIL,      "运行服务并打印日志"},
+        {"show-port",       "sp",   required_argument, OPT_SHOW_PORT,  "根据PID查找端口"},
         {"version",         "v",    no_argument,       OPT_VERSION,    "打印版本号"},
 };
 
@@ -52,8 +56,9 @@ struct vmarch_option_flags {
     char      pcmd[256]; /* cmd参数 */
     char      nsd[256];
     char      cp[64];
-    char      port[5];
-    char      dp[5];
+    char      port[PORT_SIZE];
+    char      dp[PORT_SIZE];
+    char      sp[PORT_SIZE];
     BOOL      mon;
     BOOL      xtl;
     BOOL      v;

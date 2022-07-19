@@ -4,15 +4,7 @@
 
 #include <stdio.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-int rcmdexec(const char *__Cmd, char *__Buf, size_t __BufSiz); /* 执行命令并获取执行后的命令行缓冲 */
-int pcmdexec(const char *__Cmd); /* 执行命令并打印 */
-
-#ifdef __cplusplus
-};
-#endif
+int rcmdexec(const char *__Cmd, char *__Buf, bool showcmd = true); /* 执行命令并获取执行后的命令行缓冲 */
+int pcmdexec(const char *__Cmd, bool showcmd = true); /* 执行命令并打印 */
 
 #endif /* VMARCH_SYSEXEC_H */

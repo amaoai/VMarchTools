@@ -3,12 +3,13 @@
 
 #include <string.h>
 
-int rcmdexec(const char *__Cmd, char *__Buf, size_t __BufSiz)
+int rcmdexec(const char *__Cmd, char *__Buf, bool showcmd)
 {
     FILE *fp;
     char tmpbuf[1024];
 
-    printf("[CMD] - %s\n", __Cmd);
+    if (showcmd)
+        printf("[CMD] - %s\n", __Cmd);
 
     if ((fp = popen(__Cmd, "r")) != NULL) {
         while (fgets(tmpbuf, sizeof(tmpbuf), fp) != NULL) {
@@ -23,12 +24,13 @@ int rcmdexec(const char *__Cmd, char *__Buf, size_t __BufSiz)
     return -1;
 }
 
-int pcmdexec(const char *__Cmd)
+int pcmdexec(const char *__Cmd, bool showcmd)
 {
     FILE *fp;
     char tmpbuf[1024];
 
-    printf("[CMD] - %s\n", __Cmd);
+    if (showcmd)
+        printf("[CMD] - %s\n", __Cmd);
 
     if ((fp = popen(__Cmd, "r")) != NULL) {
         while (fgets(tmpbuf, sizeof(tmpbuf), fp) != NULL)

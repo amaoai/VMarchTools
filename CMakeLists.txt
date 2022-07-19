@@ -22,7 +22,7 @@ ENDIF()
 ADD_EXECUTABLE(${PROJECT_NAME}
         main.cpp
         opts/opts.c
-        cmdexec/cmdexec.c
+        cmdexec/cmdexec.cpp
         ${CURRENT_PLATFORM_SOURCE}
         vmarchcmd-init.cpp
         vmarchcmd-exec.cpp
@@ -35,5 +35,6 @@ ADD_EXECUTABLE(${PROJECT_NAME}
         cmd/pak.cpp
         cmd/ps.cpp
         cmd/dump.cpp
+        cmd/sp.cpp
         cmd/version.cpp
 )
