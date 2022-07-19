@@ -4,6 +4,7 @@
 
 #include "opts.h"
 #include "tool/array.h"
+#include "tool/strtools.h"
 #include "typedef.h"
 #include "vmarchio.h"
 #include "cmdexec.h"
