@@ -15,4 +15,5 @@ ADD_EXECUTABLE(${PROJECT_NAME}
         cmd/start.cpp
         cmd/stop.cpp
         cmd/ps.cpp
+        cmd/dump.cpp
 )

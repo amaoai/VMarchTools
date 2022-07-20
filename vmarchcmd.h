@@ -16,3 +16,4 @@ struct vmarch_start_flags {
 void vmarch_cmd_main(int, char **);
 
 #endif /* VMARCH_VMARCHCMD_H */
+
