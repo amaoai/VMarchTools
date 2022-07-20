@@ -4,11 +4,8 @@
 
 #include "typedef.h"
 #include "verror.h"
+#include "cmdexec.h"
 #include <string>
-
-VMARCH_API void pcmdexec(const char *__Cmd);
-VMARCH_API char *rcmdexec(const char *__Cmd);
-VMARCH_API void rcmdexec_free_buffer(char *__Buf);
 
 struct vmarch_start_flags {
     bool        xtl;

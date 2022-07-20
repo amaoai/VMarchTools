@@ -16,7 +16,7 @@ const static struct option VMARCH_START_RESTART_OPTIONS[] = {
 
 /* 使用帮助提示语 */
 #define VMARCH_HELP "vmarch usage: [ <start | restart> -xtl -cp -vdp ... ] [ stop ] [ ps ] \n" \
-                            "       [ package <docker, ...> ] [ --help ]"
+                            "      [ package <docker, ...> ] [ --help ]"
 
 /* 函数定义 */
 void vmarch_cmd_main_start(const char *cmd, std::string &pcmd, int argc, char **argv);
