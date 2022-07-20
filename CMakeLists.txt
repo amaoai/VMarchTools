@@ -6,10 +6,11 @@ SET(CMAKE_CXX_STANDARD 23)
 INCLUDE_DIRECTORIES(${PROJECT_NAME} . opts cmdexec)
 
 ADD_EXECUTABLE(${PROJECT_NAME}
-        vmarch-main.cpp
+        main.cpp
         opts/opts.c
         vmarchcmd.cpp
-        vmarch-common-utils.cpp
+        tools.cpp
+        cmdexec.cpp
         cmd/start.cpp
         cmd/stop.cpp
         cmd/ps.cpp

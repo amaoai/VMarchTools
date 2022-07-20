@@ -4,7 +4,7 @@
 #include <cstdlib>
 
 /* 打印错误信息 */
-void error(const char *fmt, ...)
+void verror(const char *fmt, ...)
 {
     va_list vp;
     va_start(vp, fmt);

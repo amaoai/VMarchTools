@@ -1,0 +1,7 @@
+/* AUTHOR: TIAN_SHENG, DATE: 2022/7/20 */
+#ifndef VMARCH_TYPEDEF_H
+#define VMARCH_TYPEDEF_H
+
+#define VMARCH_API extern
+
+#endif /* VMARCH_TYPEDEF_H */

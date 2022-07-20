@@ -33,7 +33,7 @@ void vmarch_cmd_main(int argc, char **argv)
     std::string  pcmd;
 
     if (argc == 1)
-        error("%s\n", VMARCH_HELP);
+        verror("%s\n", VMARCH_HELP);
 
     cmd = argv[1];
 
@@ -62,7 +62,7 @@ void vmarch_cmd_main_start(const char *cmd, std::string &pcmd, int argc, char **
             case OPT_XTL: flags.xtl = true; break;
             case OPT_CP: flags.cp = xoptarg; break;
             case OPT_VDB: flags.vdb = xoptarg; break;
-            case OPT_UNKNOWN: error("未知选项: %s\n", xoptopt);
+            case OPT_UNKNOWN: verror("未知选项: %s\n", xoptopt);
         }
     }
 
@@ -78,7 +78,7 @@ void vmarch_cmd_main_stop(const char *cmd, std::string &pcmd, int argc, char **a
 
     while (getopts(argc, argv, VMARCH_START_RESTART_OPTIONS, sizeof(VMARCH_START_RESTART_OPTIONS), &opt) != -1) {
         switch (opt) {
-            case OPT_UNKNOWN: error("未知选项: %s\n", xoptopt);
+            case OPT_UNKNOWN: verror("未知选项: %s\n", xoptopt);
         }
     }
 
@@ -91,7 +91,7 @@ void vmarch_cmd_main_ps(const char *cmd, std::string &pcmd, int argc, char **arg
 
     while (getopts(argc, argv, VMARCH_START_RESTART_OPTIONS, sizeof(VMARCH_START_RESTART_OPTIONS), &opt) != -1) {
         switch (opt) {
-            case OPT_UNKNOWN: error("未知选项: %s\n", xoptopt);
+            case OPT_UNKNOWN: verror("未知选项: %s\n", xoptopt);
         }
     }
 
