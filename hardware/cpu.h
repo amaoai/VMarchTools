@@ -1,5 +1,0 @@
-/* AUTHOR: TIAN_SHENG, DATE: 2022/7/15 */
-#ifndef VMARCH_CPU_H
-#define VMARCH_CPU_H
-
-#endif /* VMARCH_CPU_H */

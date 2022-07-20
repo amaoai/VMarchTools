@@ -1,5 +1,0 @@
-/* AUTHOR: TIAN_SHENG, DATE: 2022/7/15 */
-#ifndef VMARCH_NET_H
-#define VMARCH_NET_H
-
-#endif /* VMARCH_NET_H */

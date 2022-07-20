@@ -2,7 +2,6 @@
 #ifndef VMARCH_VMARCHIO_H
 #define VMARCH_VMARCHIO_H
 
-#include "typedef.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <dirent.h>

@@ -96,7 +96,7 @@ int getopts(int argc, char **argv, const struct option *options, int size, int *
     static int optidx = 1;
     const struct option *p_opt;
 
-    *p_optval = OPT_ALL;
+    *p_optval = OPT_UNKNOWN;
 
     if (optidx < argc) {
         xoptopt = argv[optidx];
@@ -113,6 +113,8 @@ int getopts(int argc, char **argv, const struct option *options, int size, int *
                 /* 查找参数 */
                 xoptarg = find_argument(argc, argv, &optidx, xoptopt, p_opt);
             }
+        } else {
+            *p_optval = NULL;
         }
 
         if (xopterr != OPTERR_NO_ERR)

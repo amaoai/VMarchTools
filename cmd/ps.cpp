@@ -1,55 +1,9 @@
-/* AUTHOR: TIAN_SHENG, DATE: 2022/7/15 */
-#include "vmarchcmd.h"
-
-#include "color.h"
-#include <sstream>
+/* AUTHOR: TIAN_SHENG, DATE: 2022/7/19 */
 #include <unordered_map>
-
-#define PID_SPACE_SIZE 10
-
-// 查找 Java 进程
-// =============
-void find_java_proc(std::unordered_map<std::string, std::string> *procmap)
-{
-    char cmdbuf[0xFFFF];
-    rcmdexec("jps -l", cmdbuf);
-
-    std::stringstream buf_stream(cmdbuf);
-    std::string line;
-
-    while (getline(buf_stream, line)) {
-        size_t pos = line.find(" ");
-        std::string pid = line.substr(0, pos);
-        std::string name = line.substr(pos + 1, line.size());
-
-        if (name == "sun.tools.jps.Jps")
-            continue;
-
-        procmap->insert(std::pair<std::string, std::string>(name, pid));
-    }
-}
 
 // cmdexec: (ps)
 // ================
-void vmarchcmd_exec_ps(const struct vmarch_option_flags *p_optflags)
+void vmarch_cmd_exec_ps(std::string &pcmd)
 {
-    std::unordered_map<std::string, std::string> procmap; /* K=name, V=pid */
-    find_java_proc(&procmap);
-
-    for (auto &entry : procmap) {
-        std::string pid = entry.second.c_str();
-        size_t pidsize = pid.size();
-
-        /* 补齐空格，排列的工整一点 */
-        if (pidsize < PID_SPACE_SIZE) {
-            size_t fillin = PID_SPACE_SIZE - pidsize;
-            for (int i = 0; i < fillin; i++)
-                pid.insert(0, " ");
-        }
-
-        printf("[%s] [PORT] %s\n",
-               pid.c_str(),
-               entry.first.c_str());
-    }
 
 }
