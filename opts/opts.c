@@ -114,7 +114,7 @@ int getopts(int argc, char **argv, const struct option *options, int size, int *
                 xoptarg = find_argument(argc, argv, &optidx, xoptopt, p_opt);
             }
         } else {
-            *p_optval = NULL;
+            *p_optval = OPT_NOT_OPT;
         }
 
         if (xopterr != OPTERR_NO_ERR)

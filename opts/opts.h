@@ -13,6 +13,7 @@ extern "C" {
 #define OPTERR_NO_ERR        0  /* 没有错误 */
 #define OPTERR_NO_ARGUMENT (-1) /* 没有参数错误 */
 
+#define OPT_NOT_OPT ('!')       /* 不是一个选项 */
 #define OPT_UNKNOWN ('?')       /* 未知选项 */
 
 extern char *xoptarg;           /* 当前命令行的参数内容 */
