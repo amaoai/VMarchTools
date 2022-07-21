@@ -3,5 +3,4 @@
 
 void vmarch_cmd_exec_stop(std::string &pcmd)
 {
-
 }

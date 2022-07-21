@@ -14,6 +14,9 @@ std::string getexecfile()
     std::vector<std::string> exefvec;
     find(cwd, "-name *.jar -o -name *.war", &exefvec);
 
+    if (exefvec.empty())
+        verror("没有可以执行的JAR包");
+
     size_t exefvec_size = exefvec.size();
     if (exefvec_size > 1) {
         for (int i = 0; i < exefvec_size; i++) {

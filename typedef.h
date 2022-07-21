@@ -4,4 +4,6 @@
 
 #define VMARCH_API extern
 
+#define ARRAY_SIZE(a) ( sizeof(a) / sizeof(a[0]) )
+
 #endif /* VMARCH_TYPEDEF_H */

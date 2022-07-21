@@ -49,6 +49,7 @@ void vmarch_cmd_main_no_opt(VMARCHCMD cmd, std::string &pcmd, int argc, char **a
 void vmarch_cmd_exec_start(std::string &pcmd, struct vmarch_start_flags *flags);
 void vmarch_cmd_exec_stop(std::string &pcmd);
 void vmarch_cmd_exec_ps(std::string &pcmd);
+void vmarch_cmd_exec_dump(std::string &pcmd);
 
 /* 获取执行命令 */
 std::string getcmd(int argc, char **argv, VMARCHCMD *cmd)
@@ -102,7 +103,7 @@ void vmarch_cmd_main_start(VMARCHCMD cmd, std::string &pcmd, int argc, char **ar
     int                         opt;
     struct vmarch_start_flags   flags;
 
-    while (getopts(argc, argv, VMARCH_START_RESTART_OPTIONS, sizeof(VMARCH_START_RESTART_OPTIONS), &opt) != -1) {
+    while (getopts(argc, argv, VMARCH_START_RESTART_OPTIONS, ARRAY_SIZE(VMARCH_START_RESTART_OPTIONS), &opt) != -1) {
         switch (opt) {
             case OPT_XTL: flags.xtl = true; break;
             case OPT_CP: flags.cp = xoptarg; break;
@@ -121,7 +122,7 @@ void vmarch_cmd_main_no_opt(VMARCHCMD cmd, std::string &pcmd, int argc, char **a
 {
     int                         opt;
 
-    while (getopts(argc, argv, VMARCH_START_RESTART_OPTIONS, sizeof(VMARCH_START_RESTART_OPTIONS), &opt) != -1) {
+    while (getopts(argc, argv, VMARCH_START_RESTART_OPTIONS, ARRAY_SIZE(VMARCH_START_RESTART_OPTIONS), &opt) != -1) {
         switch (opt) {
             case OPT_UNKNOWN: verror("未知选项: %s\n", xoptopt);
         }
@@ -130,5 +131,6 @@ void vmarch_cmd_main_no_opt(VMARCHCMD cmd, std::string &pcmd, int argc, char **a
     switch (cmd) {
         case CMD_PS: vmarch_cmd_exec_ps(pcmd); break;
         case CMD_STOP: vmarch_cmd_exec_stop(pcmd); break;
+        case CMD_DUMP: vmarch_cmd_exec_dump(pcmd); break;
     }
 }
