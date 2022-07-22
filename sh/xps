@@ -1,3 +1,13 @@
+#!/bin/bash
+
+# xps
+# 当前脚本需要放在vmarchd同级目录下运行
+#
+# 脚本功能介绍：
+#
+#   查询所有 Java 进程。并列出 PID, CPU, MEM, PORTS 字段以便调试
+#
+
 JAVA_PS=$(jps -l | grep -v "sun.tools.jps.Jps")
 
 PID=

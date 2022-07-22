@@ -5,6 +5,9 @@ SET(CMAKE_CXX_STANDARD 23)
 
 INCLUDE_DIRECTORIES(${PROJECT_NAME} . opts cmdexec)
 
+MESSAGE(STATUS "Compile ${PROJECT_NAME}")
+MESSAGE(STATUS "Cmake current binary dir: ${CMAKE_CURRENT_BINARY_DIR}")
+
 ADD_EXECUTABLE(${PROJECT_NAME}
         main.cpp
         opts/opts.c

@@ -11,10 +11,10 @@ void getpwd(char *__Buf, size_t __Size)
     getcwd(__Buf, __Size);
 }
 
-void find(const char *__Path, const char *__Condi, std::vector<std::string> *__OutVec)
+void find(const char *__Path, const char *__Cond, std::vector<std::string> *__OutVec)
 {
     char __Cmd[MAX_CMD] = {};
-    snprintf(__Cmd, sizeof(__Cmd), "find %s %s", __Path, __Condi);
+    snprintf(__Cmd, sizeof(__Cmd), "find %s %s", __Path, __Cond);
 
     char *buf = rcmdexec(__Cmd);
     std::stringstream stream(buf);

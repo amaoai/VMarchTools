@@ -3,13 +3,15 @@
 #include "vmarchio.h"
 #include <iostream>
 
-std::string getexecfile()
+std::string getexec()
 {
     int seq = 1;
 
     /* 查询当前目录下的可执行文件 */
-    char cwd[PATH_MAX];
-    getpwd(cwd, sizeof(PATH_MAX));
+    char cwd[256];
+    getpwd(cwd, sizeof(cwd));
+
+    printf("cwd: %s\n", cwd);
 
     std::vector<std::string> exefvec;
     find(cwd, "-name *.jar -o -name *.war", &exefvec);
@@ -47,7 +49,7 @@ void vmarch_cmd_exec_start(std::string &pcmd, struct vmarch_start_flags *p_flags
     if (!pcmd.empty()) {
         jarfile = pcmd;
     } else {
-        jarfile = getexecfile();
+        jarfile = getexec();
     }
 
     runcmd = runcmd + " -jar " + jarfile;
