@@ -27,20 +27,20 @@ void find(const char *__Path, const char *__Cond, std::vector<std::string> *__Ou
         __OutVec->push_back(line);
 }
 
-void getexedir(char *__Buf)
+void getexedir(char *__Buf, size_t __Size)
 {
-    char __Cmd[MAX_CMD] = "readlink -f $0";
-    char *buf = rcmdexec(__Cmd);
-    getparent(buf, __Buf);
-    rcmdexec_free_buffer(buf);
+    char path[PATH_MAX];
+    readlink("/proc/self/exe", path, sizeof(path));
+    getparent(path, __Buf, __Size);
 }
 
-void getparent(const char *__Path, char *__Buf)
+void getparent(const char *__Path, char *__Buf, size_t __Size)
 {
     const char *p_ch = strrchr(__Path, '/');
 
-    if (p_ch == NULL)
-        return;
+    /* 缓冲区大小检查 */
+    if (__Size < (p_ch - __Path + 1))
+        verror("buffer size is too small");
 
     strncpy(__Buf, __Path, p_ch - __Path);
     __Buf[p_ch - __Path] = '\0';

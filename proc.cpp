@@ -2,17 +2,17 @@
 #include "proc.h"
 
 char *source_director_init();
-
 char *__CURENT_SOURCE_DIRECTOR__ = source_director_init();
 
 char *source_director_init()
 {
-    char *path = (char *) malloc(PATH_MAX);
-    char exedir[PATH_MAX];
-    getexedir(exedir);
-    getparent(exedir, path);
+    char *p_source_director = (char *) malloc(PATH_MAX);
 
-    return path;
+    char path[PATH_MAX];
+    getexedir(path, sizeof(path));
+    getparent(path, p_source_director, PATH_MAX);
+
+    return p_source_director;
 }
 
 void proc_exec(const std::string &__ProcName, const std::string __Pcmd, std::string &__Pval)

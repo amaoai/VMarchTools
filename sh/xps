@@ -25,7 +25,7 @@ do
   CPU="$(echo "$AUX" | awk '{print $3}')"
   MEM="$(echo "$AUX" | awk '{print $4}')"
 
-  OUT="$PID $NAME $CPU% $MEM%"
+  OUT="$PID $NAME $CPU $MEM"
   echo "$OUT"
 
   PORT="$(netstat -antup | grep $PID | grep LISTEN | awk '{ print $1, substr($4, index($4, ":")) }')"
