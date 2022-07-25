@@ -14,6 +14,7 @@ ADD_EXECUTABLE(${PROJECT_NAME}
         vmarchcmd.cpp
         tools.cpp
         cmdexec.cpp
+        proc.cpp
         platform/linux/ffind.cpp
         cmd/start.cpp
         cmd/stop.cpp

@@ -1,18 +1,13 @@
 /* AUTHOR: TIAN_SHENG, DATE: 2022/7/19 */
 #include "vmarchcmd.h"
-#include <unordered_map>
-#include <sstream>
 #include <string>
-#include "color.h"
-
-inline static void proc_exec_xps(const std::string &pcmd)
-{
-    pcmdexec("bash ../sh/xps ");
-}
+#include "proc.h"
 
 // cmdexec: (ps)
 // ================
 void vmarch_cmd_exec_ps(std::string &pcmd)
 {
-    proc_exec_xps(pcmd);
+    std::string xpsval;
+    proc_exec("xps", pcmd, xpsval);
+    printf("%s\n", xpsval.c_str());
 }
