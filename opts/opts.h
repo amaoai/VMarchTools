@@ -32,6 +32,7 @@ struct option {
 
 /* 遍历命令行参数，并通过p_optval匹配 */
 extern int getopts(int argc, char **argv, const struct option *options, int size, int *p_optval);
+extern void getopts_show_help(const char *title, const struct option *options, int size);
 
 #ifdef __cplusplus
 }

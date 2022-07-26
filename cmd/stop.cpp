@@ -1,6 +1,7 @@
-/* AUTHOR: TIAN_SHENG, DATE: 2022/7/19 */
-#include "vmarchcmd.h"
+/* AUTHOR: TIAN_SHENG, DATE: 2022/7/26 */
+#include "declcmd.h"
 
-void vmarch_cmd_exec_stop(std::string &pcmd)
+void cmd_stop(const std::string *pcmd)
 {
+
 }

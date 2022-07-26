@@ -125,3 +125,28 @@ int getopts(int argc, char **argv, const struct option *options, int size, int *
 
     return -1;
 }
+
+void getopts_show_help(const char *title, const struct option *options, int size)
+{
+    const struct option *p_opt;
+
+    printf("%s\n", title);
+
+    for (int i = 0; i < size; i++) {
+        p_opt = &options[i];
+
+        if (strlen(p_opt->short_name) > 0)
+            printf("  -%s", p_opt->short_name);
+
+        if (strlen(p_opt->long_name) > 0)
+            printf(", --%s", p_opt->long_name);
+
+        if (p_opt->has_arg == required_argument)
+            printf(" <arg>");
+
+        if (strlen(p_opt->comment) > 0)
+            printf(", %s", p_opt->comment);
+
+        printf("\n");
+    }
+}
