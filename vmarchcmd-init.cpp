@@ -37,8 +37,8 @@ void vmarchcmd_main_start(int argc, char **argv, struct vmarchcmd_flags *flags)
                 flags->vdb = atoi(xoptarg);
                 break;
             }
-            case OPTVAL_CP: {
-                flags->cp = xoptarg;
+            case OPTVAL_YML: {
+                flags->yml = xoptarg;
                 break;
             }
             case OPTVAL_HELP: {

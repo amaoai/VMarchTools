@@ -40,8 +40,8 @@ void cmd_start(const std::string *pcmd, const struct vmarchcmd_flags *flags)
 
     javaopts += vmarchtools::fmt(" -jar %s", jfile.c_str());
 
-    if (!flags->cp.empty())
-        javaopts += " --spring.config.location=" + flags->cp;
+    if (!flags->yml.empty())
+        javaopts += " --spring.config.location=" + flags->yml;
 
     javaopts += vmarchtools::fmt(" > %s 2>&1 &", logfile.c_str());
 
