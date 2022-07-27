@@ -44,4 +44,5 @@
 #define VMARCH_COLOR_FAINT		    "\033[2m"
 #define VMARCH_COLOR_FAINT_ITALIC	"\033[2;3m"
 #define VMARCH_COLOR_REVERSE	    "\033[7m"
+
 #endif /* VMARCH_COLOR_H */

@@ -84,6 +84,8 @@ void no_args_cmd_main(VMARCHCMD cmd, std::string *pcmd, int argc, char **argv)
     if (cmd == VMARCHCMD_PS)
         cmd_vps(pcmd);
 
+    if (cmd == VMARCHCMD_STOP)
+        cmd_stop(pcmd);
 }
 
 VMARCHCMD getcmd(int argc, char **argv, std::string *pcmd)
