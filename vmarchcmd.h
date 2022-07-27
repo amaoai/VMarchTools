@@ -23,6 +23,7 @@
 #define OPTVAL_XTL 1
 #define OPTVAL_VDB 2
 #define OPTVAL_YML 3
+#define OPTVAL_CP  4
 
 /* 未知命令 */
 inline static void verror_unknown_cmd(const std::string& cmd) {
@@ -34,13 +35,15 @@ const static struct option vmarch_cmd_start_options[] = {
         {"help", "h", no_argument, OPTVAL_HELP, "显示帮助信息"},
         {"tail", "xtl", no_argument, OPTVAL_XTL, "打印程序执行日志"},
         {"", "vdb", required_argument, OPTVAL_VDB, "远程调试端口"},
-        {"", "yml", required_argument, OPTVAL_YML, "指定配置文件路径"}
+        {"", "yml", required_argument, OPTVAL_YML, "指定配置文件路径"},
+        {"", "cp", required_argument, OPTVAL_CP, "指定配置文件后缀"}
 };
 
 struct vmarchcmd_flags {
     bool xtl;
     int vdb;
     std::string yml;
+    std::string cp;
 };
 
 void vmarchcmd_main(int argc, char **argv);

@@ -43,6 +43,9 @@ void cmd_start(const std::string *pcmd, const struct vmarchcmd_flags *flags, VMA
     if (!flags->yml.empty())
         javaopts += " --spring.config.location=" + flags->yml;
 
+    if (!flags->cp.empty())
+        javaopts += " --spring.profiles.active=" + flags->cp;
+
     javaopts += vmarchtools::fmt(" > %s 2>&1 &", logfile.c_str());
 
     pcmdexec(javaopts);

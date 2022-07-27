@@ -41,6 +41,10 @@ void vmarchcmd_main_start(int argc, char **argv, struct vmarchcmd_flags *flags)
                 flags->yml = xoptarg;
                 break;
             }
+            case OPTVAL_CP: {
+                flags->cp = xoptarg;
+                break;
+            }
             case OPTVAL_HELP: {
                 getopts_show_help("vmarch start help", vmarch_cmd_start_options, ARRAY_SIZE(vmarch_cmd_start_options));
                 exit(EXIT_SUCCESS);
