@@ -23,7 +23,7 @@ std::string check_file(const std::string *pcmd)
         ss << "找到多个JAR包，请选择其中一个: ";
         for (auto &file : vecfile)
             ss << file << " ";
-        vmarchtools::verror(ss.str().c_str());
+        vmarchtools::verror(ss.str());
     }
 
     return vecfile[0];
