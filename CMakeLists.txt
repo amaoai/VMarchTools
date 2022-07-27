@@ -11,6 +11,7 @@ add_executable(${PROJECT_NAME}
         vmarchcmd-init.cpp
         cmd/start.cpp
         cmd/stop.cpp
+        cmd/vps.cpp
         vmarchio.cpp
         cmdexec.cpp
         vmarchtools.cpp

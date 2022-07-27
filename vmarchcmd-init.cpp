@@ -80,6 +80,10 @@ void no_args_cmd_main(VMARCHCMD cmd, std::string *pcmd, int argc, char **argv)
                 verror_unknown_cmd(xoptopt);
         }
     }
+
+    if (cmd == VMARCHCMD_PS)
+        cmd_vps(pcmd);
+
 }
 
 VMARCHCMD getcmd(int argc, char **argv, std::string *pcmd)
