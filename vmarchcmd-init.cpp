@@ -54,23 +54,23 @@ void vmarchcmd_main_start(int argc, char **argv, struct vmarchcmd_flags *flags)
 /**
  * 解析有选项的命令
  */
-void have_args_cmd_main(VMARCHCMD cmd, int argc, char **argv)
+void have_args_cmd_main(VMARCHCMD cmd, std::string *pcmd, int argc, char **argv)
 {
     if (has_cmd(cmd, VMARCHCMD_START, VMARCHCMD_RESTART)) {
         struct vmarchcmd_flags flags = {};
         vmarchcmd_main_start(argc, argv, &flags);
 
         if (cmd == VMARCHCMD_RESTART)
-            cmd_stop(nullptr);
+            cmd_stop(pcmd);
 
-        cmd_start(nullptr, &flags);
+        cmd_start(pcmd, &flags);
     }
 }
 
 /**
  * 解析无选项的命令
  */
-void no_args_cmd_main(VMARCHCMD cmd, int argc, char **argv)
+void no_args_cmd_main(VMARCHCMD cmd, std::string *pcmd, int argc, char **argv)
 {
     int opt;
     while (getopts(argc, argv, vmarch_cmd_start_options, ARRAY_SIZE(vmarch_cmd_start_options), &opt) != -1) {
@@ -114,9 +114,9 @@ void vmarchcmd_main(int argc, char **argv)
     VMARCHCMD cmd = getcmd(argc, argv, &pcmd);
 
     if (has_cmd(cmd, VMARCHCMD_START, VMARCHCMD_RESTART))
-        have_args_cmd_main(cmd, argc, argv);
+        have_args_cmd_main(cmd, &pcmd, argc, argv);
 
     if (has_cmd(cmd, VMARCHCMD_STOP, VMARCHCMD_PS))
-        no_args_cmd_main(cmd, argc, argv);
+        no_args_cmd_main(cmd, &pcmd, argc, argv);
 
 }
