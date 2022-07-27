@@ -12,5 +12,5 @@ make
 
 echo "建立VMarchTools软连接"
 rm -rf /usr/bin/vmarch
-ln -s $(pwd)/vmarch /usr/bin/vmarch
+ln -s $(pwd)/VMarchTools /usr/bin/vmarch
 ls -lar /usr/bin | grep vmarch
