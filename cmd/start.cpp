@@ -3,7 +3,6 @@
 #include "cmdexec.h"
 #include "vmarchio.h"
 #include "vmarchtools.h"
-#include <stdexcept>
 #include <sstream>
 #include "color.h"
 
@@ -16,14 +15,15 @@ std::string check_file(const std::string *pcmd)
     auto vecfile = find_file(getpcwd(), ".jar");
 
     if (vecfile.empty())
-        throw std::runtime_error("no jar file found");
+        vmarchtools::verror("当前目录下没找到可执行JAR包（如果有WAR包等其他格式请手动指定）："
+                            "\n\t%svmarch start <JAR包名>%s", VMARCH_COLOR_RED, VMARCH_COLOR_RESET);
 
     if (vecfile.size() > 1) {
         std::stringstream ss;
-        ss << "more than one jar file found, please select one: ";
+        ss << "找到多个JAR包，请选择其中一个: ";
         for (auto &file : vecfile)
             ss << file << " ";
-        throw std::runtime_error(ss.str());
+        vmarchtools::verror(ss.str().c_str());
     }
 
     return vecfile[0];
@@ -33,15 +33,20 @@ void cmd_start(const std::string *pcmd, const struct vmarchcmd_flags *flags)
 {
     std::string jfile = check_file(pcmd);
     std::string javaopts = "java";
+    std::string logfile = "log.stdout";
 
     if (flags->vdb > 0)
         javaopts += " -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=" + std::to_string(flags->vdb);
 
+    javaopts += vmarchtools::fmt(" -jar %s", jfile.c_str());
+
     if (!flags->cp.empty())
-        javaopts += " -Dspring.config.active=" + flags->cp;
+        javaopts += " --spring.config.location=" + flags->cp;
+
+    javaopts += vmarchtools::fmt(" > %s 2>&1 &", logfile.c_str());
+
+    pcmdexec(javaopts);
 
     if (flags->xtl)
-        pcmdexec(vmarchtools::fmt("tail -f %s.log.stdout"));
-
-    printf("vmarchtools: start java application: %s%s%s\n", VMARCH_COLOR_RED, jfile.c_str(), VMARCH_COLOR_RESET);
+        pcmdexec(vmarchtools::fmt("tail -f %s", logfile.c_str()));
 }

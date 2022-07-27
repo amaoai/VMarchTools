@@ -9,6 +9,8 @@ void system_command_exec(const std::string &cmd, void *ptr, f_system_command_exe
     if ((fp = popen(cmd.c_str(), "r")) == nullptr)
         throw std::runtime_error("popen failed");
 
+    printf("[CMD] - %s\n", cmd.c_str());
+
     /* 读取buf */
     char buf[1024];
     while (fgets(buf, sizeof(buf), fp) != nullptr)

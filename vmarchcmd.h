@@ -28,13 +28,13 @@ const static struct option vmarch_cmd_start_options[] = {
         {"help", "h", no_argument, OPTVAL_HELP, "显示帮助信息"},
         {"tail", "xtl", no_argument, OPTVAL_XTL, "打印程序执行日志"},
         {"", "vdb", required_argument, OPTVAL_VDB, "远程调试端口"},
-        {"", "cp", required_argument, OPTVAL_CP, "配置文件前缀"}
+        {"", "cp", required_argument, OPTVAL_CP, "指定配置文件路径"}
 };
 
 struct vmarchcmd_flags {
     bool xtl;
     int vdb;
-    std::string cp; /* spring配置文件前缀 --spring.config.active */
+    std::string cp;
 };
 
 void vmarchcmd_main(int argc, char **argv);
