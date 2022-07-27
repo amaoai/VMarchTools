@@ -62,9 +62,9 @@ void have_args_cmd_main(VMARCHCMD cmd, std::string *pcmd, int argc, char **argv)
         vmarchcmd_main_start(argc, argv, &flags);
 
         if (cmd == VMARCHCMD_RESTART)
-            cmd_stop(pcmd);
+            cmd_stop(pcmd, VMARCHFLAGS_STOP_RESTART);
 
-        cmd_start(pcmd, &flags);
+        cmd_start(pcmd, &flags, VMARCHFLAGS_NO_FALGS);
     }
 }
 
@@ -82,10 +82,10 @@ void no_args_cmd_main(VMARCHCMD cmd, std::string *pcmd, int argc, char **argv)
     }
 
     if (cmd == VMARCHCMD_PS)
-        cmd_vps(pcmd);
+        cmd_vps(pcmd, VMARCHFLAGS_NO_FALGS);
 
     if (cmd == VMARCHCMD_STOP)
-        cmd_stop(pcmd);
+        cmd_stop(pcmd, VMARCHFLAGS_STOP_JUST_STOP);
 }
 
 VMARCHCMD getcmd(int argc, char **argv, std::string *pcmd)

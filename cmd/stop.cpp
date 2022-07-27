@@ -6,13 +6,16 @@
 
 extern std::string check_file(const std::string *pcmd);
 
-void cmd_stop(const std::string *pcmd)
+void cmd_stop(const std::string *pcmd, VMARCHFLAGS vflags)
 {
     std::string pid;
     auto jfile = check_file(pcmd);
 
-    if (!getvps_pid(jfile, &pid))
+    if (!getvps_pid(jfile, &pid)) {
+        if (vflags & VMARCHFLAGS_STOP_RESTART)
+            return;
         vmarchtools::verror("PID不存在或已经被杀掉");
+    }
 
     std::string name;
     if (!getvps_name(pid, &name))

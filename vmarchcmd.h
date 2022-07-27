@@ -7,6 +7,12 @@
 #include <string>
 
 #define VMARCHCMD int
+#define VMARCHFLAGS int
+
+/* flags */
+#define VMARCHFLAGS_NO_FALGS 0
+#define VMARCHFLAGS_STOP_JUST_STOP  ( 1 << 0 )
+#define VMARCHFLAGS_STOP_RESTART    ( 1 << 1 )
 
 #define VMARCHCMD_START 0x00000001
 #define VMARCHCMD_RESTART 0x00000010

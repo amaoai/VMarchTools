@@ -5,8 +5,8 @@
 #include "vmarchcmd.h"
 #include <string>
 
-extern void cmd_start(const std::string *pcmd, const struct vmarchcmd_flags *flags);
-extern void cmd_stop(const std::string *pcmd);
-extern void cmd_vps(const std::string *pcmd);
+extern void cmd_start(const std::string *pcmd, const struct vmarchcmd_flags *flags, VMARCHFLAGS);
+extern void cmd_stop(const std::string *pcmd, VMARCHFLAGS);
+extern void cmd_vps(const std::string *pcmd, VMARCHFLAGS);
 
 #endif /* VMARCH_DECLCMD_H */

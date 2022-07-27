@@ -29,7 +29,7 @@ std::string check_file(const std::string *pcmd)
     return vecfile[0];
 }
 
-void cmd_start(const std::string *pcmd, const struct vmarchcmd_flags *flags)
+void cmd_start(const std::string *pcmd, const struct vmarchcmd_flags *flags, VMARCHFLAGS)
 {
     std::string jfile = check_file(pcmd);
     std::string javaopts = "java";

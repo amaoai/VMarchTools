@@ -1,4 +1,5 @@
 /* AUTHOR: TIAN_SHENG, DATE: 2022/7/27 */
+#include "declcmd.h"
 #include "vps.h"
 #include "cmdexec.h"
 #include "vmarchtools.h"
@@ -26,7 +27,7 @@ bool getvps_pid(const std::string &name, std::string *p_buf)
     return !buf.empty();
 }
 
-void cmd_vps(const std::string *pcmd)
+void cmd_vps(const std::string *pcmd, VMARCHFLAGS)
 {
     std::string vps_buf;
     __vps(pcmd, &vps_buf);
