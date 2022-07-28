@@ -1,6 +1,13 @@
 # VMarchTools部署工具
 > VMarchTools可以很方便的帮助开发部署、测试、监控、排查BUG等开发功能。VMarchTools使用C++开发。只有开发了Linux版本；
 
+## 简单演示
+
+启动SpringBoot服务，并打印日志`（-xtl）`，设置远程调试端口`（-vdb）`，使用application-dev配置文件`（-cp）`
+```shell
+$ vmarch start -xtl -cp dev -vdb 8080
+```
+
 ## 安装/构建
 
 ### 编译环境
