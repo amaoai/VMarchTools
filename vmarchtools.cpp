@@ -80,6 +80,26 @@ namespace vmarchtools {
         return true;
     }
 
+    std::vector<std::string> split(const std::string &str, const std::string &delim)
+    {
+        std::vector<std::string> ret;
+        size_t pos = 0;
+        while (true) {
+            size_t next = str.find(delim, pos);
+            if (next == std::string::npos) {
+                ret.push_back(str.substr(pos));
+                break;
+            }
+            ret.push_back(str.substr(pos, next - pos));
+            pos = next + delim.size();
+        }
+
+        if (!ret.empty() && ret[ret.size() - 1].empty())
+            ret.pop_back();
+
+        return ret;
+    }
+
 }
 
 #pragma clang diagnostic pop

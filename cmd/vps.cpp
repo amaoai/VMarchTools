@@ -3,11 +3,17 @@
 #include "vps.h"
 #include "cmdexec.h"
 #include "vmarchtools.h"
+#include <iostream>
 
 void __vps(const std::string *pcmd, std::string *p_buf)
 {
     rcmdexec(vmarchtools::fmt("ps -ef | grep %s | grep -v grep | grep -v vmarch",
                               pcmd->empty() ? "java" : pcmd->c_str()), p_buf);
+}
+
+bool getvps_cmd(const std::string &pid, std::string *p_buf)
+{
+    return true;
 }
 
 bool getvps_name(const std::string &pid, std::string *p_buf)
@@ -21,8 +27,27 @@ bool getvps_name(const std::string &pid, std::string *p_buf)
 bool getvps_pid(const std::string &name, std::string *p_buf)
 {
     std::string buf;
-    rcmdexec(vmarchtools::fmt("ps -ef | grep %s | grep -v grep | grep -v vmarch | awk '{printf \"%%s\", $2}'",
+    rcmdexec(vmarchtools::fmt("ps -ef | grep %s | grep -v grep | grep -v vmarch | awk '{printf \"%%s,\", $2}'",
                               name.c_str()), &buf);
+
+    std::vector<std::string> pids = vmarchtools::split(buf, ",");
+    if (pids.size() > 1) {
+        vmarchtools::printf_to_stdout("找到多个PID，请选择其中一个：\n");
+        for (int i = 0; i < pids.size(); i++) {
+            vmarchtools::printf_to_stdout(
+                    vmarchtools::fmt("[%d] %s\n", i + 1, pids[i].c_str()));
+        }
+
+        int idx;
+        vmarchtools::printf_to_stdout("请输入序号：");
+        std::cin >> idx;
+
+        if (idx > pids.size())
+            vmarchtools::verror("序号超出范围！");
+
+        buf.assign(pids[idx - 1]);
+    }
+
     p_buf->assign(buf);
     return !buf.empty();
 }

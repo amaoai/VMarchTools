@@ -4,6 +4,7 @@
 
 #include <string>
 
+bool getvps_cmd(const std::string &pid, std::string *p_buf);
 bool getvps_name(const std::string &pid, std::string *p_buf);
 bool getvps_pid(const std::string &name, std::string *p_buf);
 
