@@ -28,7 +28,7 @@ void getproc(const std::string &pid, struct system_proc_info *ptr)
 
     ptr->pid.assign(pid);
     if (!getvps_name(pid, &ptr->name))
-        vmarchtools::verror("进程不存在或有多个");
+        vmarchtools::verror("进程不存在或有多个（如果PID很长就是多个PID组合起来的），PID=%s", pid.c_str());
 
     getelem(pid, "$1", &ptr->user);
     getelem(pid, "$7", &ptr->tty);

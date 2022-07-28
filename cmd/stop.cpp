@@ -17,7 +17,7 @@ void cmd_stop(const std::string *pcmd, VMARCHFLAGS vflags)
 
     std::string name;
     if (!getvps_name(pid, &name))
-        vmarchtools::verror("进程名不存在或已经被杀掉，PID=%s", pid.c_str());
+        vmarchtools::verror("进程不存在或有多个（如果PID很长就是多个PID组合起来的），PID=%s", pid.c_str());
 
     pcmdexec(vmarchtools::fmt("kill -9 %s", pid.c_str()));
     VINFO_COLOR_BG_RED("已杀死进程【%s/%s】\n", pid.c_str(), name.c_str());
