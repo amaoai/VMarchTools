@@ -19,6 +19,7 @@ struct system_proc_info {
     std::string start;
     std::string time;
     std::string tty;
+    std::string location;
     float cpu;
     float mem;
     float vsz;
