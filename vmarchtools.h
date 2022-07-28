@@ -20,8 +20,11 @@ namespace vmarchtools {
     std::vector<std::string> split(const std::string &str, const std::string &delim);
 }
 
-/* 打印红色背景的文本 */
 #define VINFO_COLOR_BG_RED(m, ...) \
     vmarchtools::printf_to_stdout(VMARCH_COLOR_BG_RED VMARCH_COLOR_BOLD m VMARCH_COLOR_RESET VMARCH_COLOR_NORMAL, ##__VA_ARGS__)
+#define VINFO_COLOR_BG_BLUE(m, ...) \
+    vmarchtools::printf_to_stdout(VMARCH_COLOR_BG_BLUE VMARCH_COLOR_BOLD m VMARCH_COLOR_RESET VMARCH_COLOR_NORMAL, ##__VA_ARGS__)
+#define VINFO_COLOR_BG_GREEN(m, ...) \
+    vmarchtools::printf_to_stdout(VMARCH_COLOR_BG_GREEN VMARCH_COLOR_BOLD m VMARCH_COLOR_RESET VMARCH_COLOR_NORMAL, ##__VA_ARGS__)
 
 #endif /* VMARCH_VMARCHTOOLS_H */
