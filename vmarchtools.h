@@ -16,7 +16,7 @@ namespace vmarchtools {
     void printf_to_stdout(const std::string &__fmt, ...);
     void printf_to_stderr(const std::string &__fmt, ...);
     bool is_number(const std::string &str);
-    bool fread_all(const std::string &path, std::string *p_buf);
+    void fread_all(const std::string &path, std::string *p_buf); /* 可能不适用于vfs文件系统中的文件 */
     std::vector<std::string> split(const std::string &str, const std::string &delim);
 }
 

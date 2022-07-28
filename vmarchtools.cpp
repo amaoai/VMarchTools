@@ -65,19 +65,22 @@ namespace vmarchtools {
         });
     }
 
-    bool fread_all(const std::string &path, std::string *p_buf)
+    void fread_all(const std::string &path, std::string *p_buf)
     {
-        FILE *fp = fopen(path.c_str(), "r");
+        FILE        *fp;
+        size_t      fsz;
 
-        if (fp == nullptr)
-            return false;
+        fp = fopen(path.c_str(), "r");
 
-        char buf[1024];
-        while (fgets(buf, sizeof(buf), fp) != nullptr)
-            p_buf->append(buf);
+        fseek(fp, 0, SEEK_END);
+        fsz = ftell(fp);
+        fseek(fp, 0, SEEK_SET);
+
+        char buf[fsz];
+        fread(buf, fsz, 1, fp);
 
         fclose(fp);
-        return true;
+        p_buf->assign(buf);
     }
 
     std::vector<std::string> split(const std::string &str, const std::string &delim)
