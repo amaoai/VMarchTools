@@ -2,14 +2,15 @@
 #include "cmdexec.h"
 #include <stdexcept>
 
-void system_command_exec(const std::string &cmd, void *ptr, f_system_command_exec_callback f_callback)
+void system_command_exec(const std::string &cmd, bool is_print, void *ptr, f_system_command_exec_callback f_callback)
 {
     FILE *fp;
 
     if ((fp = popen(cmd.c_str(), "r")) == nullptr)
         throw std::runtime_error("popen failed");
 
-    // printf("[CMD] - %s\n", cmd.c_str());
+    if (is_print)
+        printf("[CMD] - %s\n", cmd.c_str());
 
     /* 读取buf */
     char buf[1024];
@@ -19,16 +20,16 @@ void system_command_exec(const std::string &cmd, void *ptr, f_system_command_exe
     pclose(fp);
 }
 
-void pcmdexec(const std::string &cmd)
+void pcmdexec(const std::string &cmd, bool is_print)
 {
-    system_command_exec(cmd, nullptr, [](const char *buf, void *) -> void {
+    system_command_exec(cmd, is_print, nullptr, [](const char *buf, void *) -> void {
         printf("%s", buf);
     });
 }
 
-void rcmdexec(const std::string &cmd, std::string *buf)
+void rcmdexec(const std::string &cmd, std::string *buf, bool is_print)
 {
-    system_command_exec(cmd, buf, [](const char *buf, void *p_buf) -> void {
+    system_command_exec(cmd, is_print, buf, [](const char *buf, void *p_buf) -> void {
         ((std::string *) p_buf)->append(buf);
     });
 }

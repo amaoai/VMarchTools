@@ -19,7 +19,7 @@ std::string getpid(const std::string *pcmd)
 }
 
 #define getelem(pid, num, ptr) \
-    rcmdexec(vmarchtools::fmt("ps aux | grep %s | grep -v grep | awk '{printf \"%%s\", %s}'", pid.c_str(), num), (ptr))
+    rcmdexec(vmarchtools::fmt("ps aux | grep %s | grep -v grep | awk '{printf \"%%s\", %s}'", pid.c_str(), num), (ptr), false)
 
 
 void getproc(const std::string &pid, struct system_proc_info *ptr)
