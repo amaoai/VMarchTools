@@ -12,6 +12,7 @@ add_executable(${PROJECT_NAME}
         cmd/start.cpp
         cmd/stop.cpp
         cmd/vps.cpp
+        cmd/status.cpp
         vmarchio.cpp
         cmdexec.cpp
         vmarchtools.cpp

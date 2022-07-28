@@ -7,7 +7,7 @@
 #include "color.h"
 
 /* 获取当前需要启动的Java文件 */
-std::string check_file(const std::string *pcmd)
+std::string check_java_file(const std::string *pcmd)
 {
     if (!pcmd->empty())
         return *pcmd;
@@ -31,7 +31,7 @@ std::string check_file(const std::string *pcmd)
 
 void cmd_start(const std::string *pcmd, const struct vmarchcmd_flags *flags, VMARCHFLAGS)
 {
-    std::string jfile = check_file(pcmd);
+    std::string jfile = check_java_file(pcmd);
     std::string javaopts = "java";
     std::string logfile = "log.stdout";
 

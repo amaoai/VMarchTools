@@ -6,6 +6,7 @@
 #include <cstdio>
 #include <stdexcept>
 #include <cstdarg>
+#include <algorithm>
 
 namespace vmarchtools {
 
@@ -52,6 +53,31 @@ namespace vmarchtools {
         va_start(va, __fmt);
         fprintf(stderr, "%s", vfmt(__fmt, va).c_str());
         va_end(va);
+    }
+
+    bool is_number(const std::string &str)
+    {
+        if (str.empty())
+            return false;
+
+        return std::all_of(str.begin(), str.end(), [](char ch) {
+            return isdigit(ch);
+        });
+    }
+
+    bool fread_all(const std::string &path, std::string *p_buf)
+    {
+        FILE *fp = fopen(path.c_str(), "r");
+
+        if (fp == nullptr)
+            return false;
+
+        char buf[1024];
+        while (fgets(buf, sizeof(buf), fp) != nullptr)
+            p_buf->append(buf);
+
+        fclose(fp);
+        return true;
     }
 
 }

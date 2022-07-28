@@ -6,6 +6,7 @@
 #include "color.h"
 
 #define ARRAY_SIZE(a) ( sizeof(a) / sizeof(a[0]) )
+extern std::string check_java_file(const std::string *pcmd);
 
 namespace vmarchtools {
     std::string vfmt(const std::string &__fmt, va_list __va);
@@ -13,6 +14,8 @@ namespace vmarchtools {
     void verror(const std::string &__fmt, ...);
     void printf_to_stdout(const std::string &__fmt, ...);
     void printf_to_stderr(const std::string &__fmt, ...);
+    bool is_number(const std::string &str);
+    bool fread_all(const std::string &path, std::string *p_buf);
 }
 
 /* 打印红色背景的文本 */

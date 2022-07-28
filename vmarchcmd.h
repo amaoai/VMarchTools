@@ -14,16 +14,18 @@
 #define VMARCHFLAGS_STOP_JUST_STOP  ( 1 << 0 )
 #define VMARCHFLAGS_STOP_RESTART    ( 1 << 1 )
 
-#define VMARCHCMD_START 0x00000001
-#define VMARCHCMD_RESTART 0x00000010
-#define VMARCHCMD_STOP 0x00000100
-#define VMARCHCMD_PS 0x00001000
+/* cmds */
+#define VMARCHCMD_START             0x00000001
+#define VMARCHCMD_RESTART           0x00000010
+#define VMARCHCMD_STOP              0x00000100
+#define VMARCHCMD_PS                0x00001000
+#define VMARCHCMD_STATUS            0x00010000
 
-#define OPTVAL_HELP 0
-#define OPTVAL_XTL 1
-#define OPTVAL_VDB 2
-#define OPTVAL_YML 3
-#define OPTVAL_CP  4
+#define OPTVAL_HELP                 0
+#define OPTVAL_XTL                  1
+#define OPTVAL_VDB                  2
+#define OPTVAL_YML                  3
+#define OPTVAL_CP                   4
 
 /* 未知命令 */
 inline static void verror_unknown_cmd(const std::string& cmd) {

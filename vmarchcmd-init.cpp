@@ -90,6 +90,9 @@ void no_args_cmd_main(VMARCHCMD cmd, std::string *pcmd, int argc, char **argv)
 
     if (cmd == VMARCHCMD_STOP)
         cmd_stop(pcmd, VMARCHFLAGS_STOP_JUST_STOP);
+
+    if (cmd == VMARCHCMD_STATUS)
+        cmd_status(pcmd, VMARCHFLAGS_NO_FALGS);
 }
 
 VMARCHCMD getcmd(int argc, char **argv, std::string *pcmd)
@@ -104,6 +107,7 @@ VMARCHCMD getcmd(int argc, char **argv, std::string *pcmd)
     if (cmdstr == "restart") cmd = VMARCHCMD_RESTART;
     if (cmdstr == "stop") cmd = VMARCHCMD_STOP;
     if (cmdstr == "ps") cmd = VMARCHCMD_PS;
+    if (cmdstr == "status") cmd = VMARCHCMD_STATUS;
 
 UNKNOWN_COMMAND:
     if (cmd == 0)
@@ -127,7 +131,7 @@ void vmarchcmd_main(int argc, char **argv)
     if (has_cmd(cmd, VMARCHCMD_START, VMARCHCMD_RESTART))
         have_args_cmd_main(cmd, &pcmd, argc, argv);
 
-    if (has_cmd(cmd, VMARCHCMD_STOP, VMARCHCMD_PS))
+    if (has_cmd(cmd, VMARCHCMD_STOP, VMARCHCMD_PS, VMARCHCMD_STATUS))
         no_args_cmd_main(cmd, &pcmd, argc, argv);
 
 }

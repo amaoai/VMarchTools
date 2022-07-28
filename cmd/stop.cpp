@@ -4,12 +4,10 @@
 #include "vmarchtools.h"
 #include "cmdexec.h"
 
-extern std::string check_file(const std::string *pcmd);
-
 void cmd_stop(const std::string *pcmd, VMARCHFLAGS vflags)
 {
     std::string pid;
-    auto jfile = check_file(pcmd);
+    auto jfile = check_java_file(pcmd);
 
     if (!getvps_pid(jfile, &pid)) {
         if (vflags & VMARCHFLAGS_STOP_RESTART)
