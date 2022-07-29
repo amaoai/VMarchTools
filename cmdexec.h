@@ -4,7 +4,7 @@
 
 #include <string>
 
-void pcmdexec(const std::string &cmd, bool is_print = false);
-void rcmdexec(const std::string &cmd, std::string *buf, bool is_print = false);
+void pcmdexec(const std::string &cmd, bool is_print_cmd = false);
+void rcmdexec(const std::string &cmd, std::string *buf, bool is_print_cmd = false);
 
 #endif /* VMARCH_CMDEXEC_H */

@@ -21,27 +21,25 @@ uint64_t has_cmd(VMARCHCMD cmd, Args... va_list)
     return false;
 }
 
-/**
- * 解析 start 或 restart 需要的选项
- */
-void vmarchcmd_main_start(int argc, char **argv, struct vmarchcmd_flags *flags)
+/* 解析 start 或 restart 需要的选项 */
+void vmarchcmd_main_parse_start(int argc, char **argv, struct vmarchcmd_flags *flags)
 {
     int opt;
     while (getopts(argc, argv, vmarch_cmd_start_options, ARRAY_SIZE(vmarch_cmd_start_options), &opt) != -1) {
         switch (opt) {
-            case OPTVAL_XTL: {
+            case OPTVAL_START_XTL: {
                 flags->xtl = true;
                 break;
             }
-            case OPTVAL_VDB: {
+            case OPTVAL_START_VDB: {
                 flags->vdb = atoi(xoptarg);
                 break;
             }
-            case OPTVAL_YML: {
+            case OPTVAL_START_YML: {
                 flags->yml = xoptarg;
                 break;
             }
-            case OPTVAL_CP: {
+            case OPTVAL_START_CP: {
                 flags->cp = xoptarg;
                 break;
             }
@@ -56,20 +54,47 @@ void vmarchcmd_main_start(int argc, char **argv, struct vmarchcmd_flags *flags)
     }
 }
 
+/* 解析 status 需要的选项 */
+void vmarchcmd_main_parse_status(int argc, char **argv, struct vmarchcmd_flags *flags)
+{
+    int opt;
+    while (getopts(argc, argv, vmarch_cmd_status_options, ARRAY_SIZE(vmarch_cmd_status_options), &opt) != -1) {
+        switch (opt) {
+            case OPTVAL_STATUS_DETAIL: {
+                flags->detail = true;
+                break;
+            }
+            case OPTVAL_HELP: {
+                getopts_show_help("vmarch start help", vmarch_cmd_status_options, ARRAY_SIZE(vmarch_cmd_status_options));
+                exit(EXIT_SUCCESS);
+            }
+            case OPT_UNKNOWN:
+                verror_unknown_cmd(xoptopt);
+        }
+    }
+}
+
 /**
  * 解析有选项的命令
  */
 void have_args_cmd_main(VMARCHCMD cmd, std::string *pcmd, int argc, char **argv)
 {
+    struct vmarchcmd_flags flags = {};
+
     if (has_cmd(cmd, VMARCHCMD_START, VMARCHCMD_RESTART)) {
-        struct vmarchcmd_flags flags = {};
-        vmarchcmd_main_start(argc, argv, &flags);
+        vmarchcmd_main_parse_start(argc, argv, &flags);
 
         if (cmd == VMARCHCMD_RESTART)
             cmd_stop(pcmd, VMARCHFLAGS_STOP_RESTART);
 
         cmd_start(pcmd, &flags, VMARCHFLAGS_NO_FALGS);
     }
+
+    if (cmd == VMARCHCMD_STATUS) {
+        vmarchcmd_main_parse_status(argc, argv, &flags);
+        cmd_status(pcmd, &flags, VMARCHFLAGS_NO_FALGS);
+    }
+
 }
 
 /**
@@ -90,9 +115,6 @@ void no_args_cmd_main(VMARCHCMD cmd, std::string *pcmd, int argc, char **argv)
 
     if (cmd == VMARCHCMD_STOP)
         cmd_stop(pcmd, VMARCHFLAGS_STOP_JUST_STOP);
-
-    if (cmd == VMARCHCMD_STATUS)
-        cmd_status(pcmd, VMARCHFLAGS_NO_FALGS);
 }
 
 VMARCHCMD getcmd(int argc, char **argv, std::string *pcmd)
@@ -128,10 +150,10 @@ void vmarchcmd_main(int argc, char **argv)
     std::string pcmd;
     VMARCHCMD cmd = getcmd(argc, argv, &pcmd);
 
-    if (has_cmd(cmd, VMARCHCMD_START, VMARCHCMD_RESTART))
+    if (has_cmd(cmd, VMARCHCMD_START, VMARCHCMD_RESTART, VMARCHCMD_STATUS))
         have_args_cmd_main(cmd, &pcmd, argc, argv);
 
-    if (has_cmd(cmd, VMARCHCMD_STOP, VMARCHCMD_PS, VMARCHCMD_STATUS))
+    if (has_cmd(cmd, VMARCHCMD_STOP, VMARCHCMD_PS))
         no_args_cmd_main(cmd, &pcmd, argc, argv);
 
 }

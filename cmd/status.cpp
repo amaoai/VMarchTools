@@ -55,7 +55,7 @@ void getproc(unsigned long pid, struct system_proc_info *ptr)
 
 void print_proc_info(const struct system_proc_info *proc)
 {
-    vmarchtools::printf_to_stdout("%s•%s %s from VMarchTools <status> command.\n", VMARCH_COLOR_BOLD_GREEN, VMARCH_COLOR_RESET, proc->name.c_str());
+    vmarchtools::printf_to_stdout("%s●%s %s from VMarchTools <status> command.\n", VMARCH_COLOR_BOLD_GREEN, VMARCH_COLOR_RESET, proc->name.c_str());
     vmarchtools::printf_to_stdout("    Start/Run Status (%s)\n", proc->cmd.c_str());
     vmarchtools::printf_to_stdout("      └─CPU: %.2f%\n", proc->cpu);
     vmarchtools::printf_to_stdout("      └─Memory: %.2f%\n", proc->mem);
@@ -67,9 +67,15 @@ void print_proc_info(const struct system_proc_info *proc)
     vmarchtools::printf_to_stdout("Start & Run time:  %s/%s\n", proc->start_time.c_str(), proc->running_time.c_str());
 }
 
-void cmd_status(const std::string *pcmd, VMARCHFLAGS)
+void cmd_status(const std::string *pcmd, const struct vmarchcmd_flags *flags, VMARCHFLAGS)
 {
     unsigned long pid = getpid(pcmd);
+
+    if (flags->detail) {
+        pcmdexec(vmarchtools::fmt("cat /proc/%lu/status", pid));
+        exit(0);
+    }
+
     struct system_proc_info proc {};
     getproc(pid, &proc);
     print_proc_info(&proc);
