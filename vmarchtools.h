@@ -17,14 +17,14 @@ namespace vmarchtools {
     bool is_number(const std::string &str); /* 判断字符串是不是数字 */
     void fread_all(const std::string &path, std::string *p_buf); /* 可能不适用于vfs文件系统中的文件 */
     std::vector<std::string> split(const std::string &str, const std::string &delim); /* 分割字符串 */
-    template <typename T>
+    template<typename T>
       T value_of(const std::string &str) /* 字符串转其他类型 */
-    {
-        std::stringstream ss(str);
-        T ret;
-        ss >> ret;
-        return ret;
-    }
+        {
+            std::stringstream ss(str);
+            T ret;
+            ss >> ret;
+            return ret;
+        }
 }
 
 /* 打印红色背景的文本到标准IO */
