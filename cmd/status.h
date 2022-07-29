@@ -11,7 +11,7 @@ struct proc_port_info {
 };
 
 struct system_proc_info {
-    std::string pid;
+    unsigned long pid;
     std::string user;
     std::string name;
     std::string cmd;
@@ -28,9 +28,9 @@ struct system_proc_info {
     std::vector<struct proc_port_info> prots;
 };
 
-std::string getpid(const std::string *pcmd);
+unsigned long getpid(const std::string *pcmd);
 /* 获取进程状态 */
-void getproc(const std::string &pid, struct system_proc_info *ptr);
+void getproc(unsigned long pid, struct system_proc_info *ptr);
 /* 打印进程状态 */
 void print_proc_info(const struct system_proc_info *proc);
 
