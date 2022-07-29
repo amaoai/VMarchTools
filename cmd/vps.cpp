@@ -36,15 +36,15 @@ bool getvps_pid(const std::string &name, unsigned long *p_pid)
 
     std::vector<std::string> pids = vmarchtools::split(buf, ",");
     if (pids.size() > 1) {
-        vmarchtools::printf_to_stdout("找到多个PID，请选择其中一个：\n");
+        printf("找到多个PID，请选择其中一个：\n");
         for (int i = 0; i < pids.size(); i++) {
             std::string cmd;
             getvps_cmd(vmarchtools::value_of<unsigned long>(pids[i]), &cmd);
-            vmarchtools::printf_to_stdout("[%d] %s %s\n", i + 1,pids[i].c_str(), cmd.c_str());
+            printf("[%d] %s %s\n", i + 1,pids[i].c_str(), cmd.c_str());
         }
 
         int idx;
-        vmarchtools::printf_to_stdout("请输入你要使用的PID序号：");
+        printf("请输入你要使用的PID序号：");
         std::cin >> idx;
 
         if (idx > pids.size())
@@ -61,5 +61,5 @@ void cmd_vps(const std::string *pcmd, VMARCHFLAGS)
 {
     std::string vps_buf;
     __vps(pcmd, &vps_buf);
-    vmarchtools::printf_to_stdout("%s\n", vps_buf.c_str());
+    printf("%s\n", vps_buf.c_str());
 }

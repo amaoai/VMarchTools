@@ -39,22 +39,6 @@ namespace vmarchtools {
         va_end(va);
     }
 
-    void printf_to_stdout(const std::string &__fmt, ...)
-    {
-        va_list va;
-        va_start(va, __fmt);
-        fprintf(stdout, "%s", vfmt(__fmt, va).c_str());
-        va_end(va);
-    }
-
-    void printf_to_stderr(const std::string &__fmt, ...)
-    {
-        va_list va;
-        va_start(va, __fmt);
-        fprintf(stderr, "%s", vfmt(__fmt, va).c_str());
-        va_end(va);
-    }
-
     bool is_number(const std::string &str)
     {
         if (str.empty())

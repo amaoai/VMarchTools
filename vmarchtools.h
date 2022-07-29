@@ -15,7 +15,6 @@ namespace vmarchtools {
     std::string fmt(const std::string &__fmt, ...); /* 字符串格式化 */
     void verror(const std::string &__fmt, ...); /* 程序中断错误 */
     void printf_to_stdout(const std::string &__fmt, ...); /* 打印标准 */
-    void printf_to_stderr(const std::string &__fmt, ...); /* 打印错误 */
     bool is_number(const std::string &str); /* 判断字符串是不是数字 */
     void fread_all(const std::string &path, std::string *p_buf); /* 可能不适用于vfs文件系统中的文件 */
     std::vector<std::string> split(const std::string &str, const std::string &delim); /* 分割字符串 */
@@ -31,12 +30,12 @@ namespace vmarchtools {
 
 /* 打印红色背景的文本到标准IO */
 #define VINFO_COLOR_BG_RED(m, ...) \
-    vmarchtools::printf_to_stdout(VMARCH_COLOR_BG_RED VMARCH_COLOR_BOLD m VMARCH_COLOR_RESET VMARCH_COLOR_NORMAL, ##__VA_ARGS__)
+    printf(VMARCH_COLOR_BG_RED VMARCH_COLOR_BOLD m VMARCH_COLOR_RESET VMARCH_COLOR_NORMAL, ##__VA_ARGS__)
 /* 打印蓝色背景的文本到标准IO */
 #define VINFO_COLOR_BG_BLUE(m, ...) \
-    vmarchtools::printf_to_stdout(VMARCH_COLOR_BG_BLUE VMARCH_COLOR_BOLD m VMARCH_COLOR_RESET VMARCH_COLOR_NORMAL, ##__VA_ARGS__)
+    printf(VMARCH_COLOR_BG_BLUE VMARCH_COLOR_BOLD m VMARCH_COLOR_RESET VMARCH_COLOR_NORMAL, ##__VA_ARGS__)
 /* 打印绿色背景的文本到标准IO */
 #define VINFO_COLOR_BG_GREEN(m, ...) \
-    vmarchtools::printf_to_stdout(VMARCH_COLOR_BG_GREEN VMARCH_COLOR_BOLD m VMARCH_COLOR_RESET VMARCH_COLOR_NORMAL, ##__VA_ARGS__)
+    printf(VMARCH_COLOR_BG_GREEN VMARCH_COLOR_BOLD m VMARCH_COLOR_RESET VMARCH_COLOR_NORMAL, ##__VA_ARGS__)
 
 #endif /* VMARCH_VMARCHTOOLS_H */
