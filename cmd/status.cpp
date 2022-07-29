@@ -39,13 +39,14 @@ void getproc(const std::string &pid, struct system_proc_info *ptr)
     getelem(pid, $10, &ptr->time);
 
     getelem(pid, $3, &buf);
-    ptr->cpu = atof(buf.c_str());
+    ptr->cpu = vmarchtools::value_of<float>(buf);
     getelem(pid, $4, &buf);
-    ptr->mem = atof(buf.c_str());
+    ptr->mem = vmarchtools::value_of<float>(buf);
     getelem(pid, $5, &buf);
-    ptr->vsz = atof(buf.c_str());
+    ptr->vsz = vmarchtools::value_of<float>(buf);
     getelem(pid, $6, &buf);
-    ptr->rss = atof(buf.c_str());
+    ptr->rss = vmarchtools::value_of<float>(buf);
+
 }
 
 void print_proc_info(const struct system_proc_info *proc)

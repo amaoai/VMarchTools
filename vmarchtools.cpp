@@ -67,8 +67,8 @@ namespace vmarchtools {
 
     void fread_all(const std::string &path, std::string *p_buf)
     {
-        FILE        *fp;
-        size_t      fsz;
+        FILE *fp;
+        size_t fsz;
 
         fp = fopen(path.c_str(), "r");
 

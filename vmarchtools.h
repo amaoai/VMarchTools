@@ -5,19 +5,28 @@
 #include "color.h"
 #include <string>
 #include <vector>
+#include <sstream>
 
 #define ARRAY_SIZE(a) ( sizeof(a) / sizeof(a[0]) )
 extern std::string check_java_file(const std::string *pcmd);
 
 namespace vmarchtools {
-    std::string vfmt(const std::string &__fmt, va_list __va);
-    std::string fmt(const std::string &__fmt, ...);
-    void verror(const std::string &__fmt, ...);
-    void printf_to_stdout(const std::string &__fmt, ...);
-    void printf_to_stderr(const std::string &__fmt, ...);
-    bool is_number(const std::string &str);
+    std::string vfmt(const std::string &__fmt, va_list __va); /* va_list格式化 */
+    std::string fmt(const std::string &__fmt, ...); /* 格式化 */
+    void verror(const std::string &__fmt, ...); /* 程序中断错误 */
+    void printf_to_stdout(const std::string &__fmt, ...); /* 打印标准 */
+    void printf_to_stderr(const std::string &__fmt, ...); /* 打印错误 */
+    bool is_number(const std::string &str); /* 判断字符串是不是数字 */
     void fread_all(const std::string &path, std::string *p_buf); /* 可能不适用于vfs文件系统中的文件 */
-    std::vector<std::string> split(const std::string &str, const std::string &delim);
+    std::vector<std::string> split(const std::string &str, const std::string &delim); /* 分割字符串 */
+    template <typename T>
+      T value_of(const std::string &str) /* 字符串转其他类型 */
+    {
+        std::stringstream ss(str);
+        T ret;
+        ss >> ret;
+        return ret;
+    }
 }
 
 #define VINFO_COLOR_BG_RED(m, ...) \
