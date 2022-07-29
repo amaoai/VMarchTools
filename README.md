@@ -3,11 +3,30 @@
 
 ## 简单演示
 
-启动SpringBoot服务，并打印日志`（-xtl）`，设置远程调试端口`（-vdb）`，使用application-dev配置文件`（-cp）`
+**运行服务**
 ```shell
 $ vmarch start -xtl -cp dev -vdb 8080
 ```
+ - 打印日志`（-xtl）`
+ - 设置远程调试端口`（-vdb）`
+ - 使用application-dev配置文件`（-cp）`
 
+**使用Status命令**
+```shell
+$ vmarch status pid
+```
+```shell
+• springboot-demo.jar from VMarchTools <status> command.
+    Start/Run Status (java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8999 -jar foxlibc-1.0.0.jar --spring.config.location=application-dev.yml)
+      └─CPU: 2.70%
+      └─Memory: 2.76%
+      └─VSZ: 2.76%
+      └─RSS: 2.76%
+    Main PID: 2382465
+  process status: Sl
+  terminal status: pts/0
+start & run time:  10:31/0:16
+```
 ## 安装/构建
 
 ### 编译环境
