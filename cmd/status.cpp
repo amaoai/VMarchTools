@@ -18,9 +18,9 @@ std::string getpid(const std::string *pcmd)
     return pid;
 }
 
-#define getelem(pid, num, ptr) \
-    rcmdexec(vmarchtools::fmt("ps aux | grep %s | grep -v grep | awk '{printf \"%%s\", %s}'", pid.c_str(), num), (ptr), false)
 
+#define getelem(pid, num, ptr) \
+    rcmdexec(getps(pid, "printf \"%s\", "#num), (ptr), false)
 
 void getproc(const std::string &pid, struct system_proc_info *ptr)
 {
@@ -30,19 +30,19 @@ void getproc(const std::string &pid, struct system_proc_info *ptr)
     if (!getvps_name(pid, &ptr->name))
         vmarchtools::verror("进程不存在或有多个（如果PID很长就是多个PID组合起来的），PID=%s", pid.c_str());
 
-    getelem(pid, "$1", &ptr->user);
-    getelem(pid, "$7", &ptr->tty);
-    getelem(pid, "$8", &ptr->status);
-    getelem(pid, "$9", &ptr->start);
-    getelem(pid, "$10", &ptr->time);
+    getelem(pid, $1, &ptr->user);
+    getelem(pid, $7, &ptr->tty);
+    getelem(pid, $8, &ptr->status);
+    getelem(pid, $9, &ptr->start);
+    getelem(pid, $10, &ptr->time);
 
-    getelem(pid, "$3", &buf);
+    getelem(pid, $3, &buf);
     ptr->cpu = atof(buf.c_str());
-    getelem(pid, "$4", &buf);
+    getelem(pid, $4, &buf);
     ptr->mem = atof(buf.c_str());
-    getelem(pid, "$5", &buf);
+    getelem(pid, $5, &buf);
     ptr->vsz = atof(buf.c_str());
-    getelem(pid, "$6", &buf);
+    getelem(pid, $6, &buf);
     ptr->rss = atof(buf.c_str());
 }
 
