@@ -19,7 +19,7 @@ std::string getpid(const std::string *pcmd)
 }
 
 
-#define getelem(pid, num, ptr) \
+#define getps_aux_elem(pid, num, ptr) \
     rcmdexec(getps(pid, "printf \"%s\", "#num), (ptr))
 
 void getproc(const std::string &pid, struct system_proc_info *ptr)
@@ -32,20 +32,24 @@ void getproc(const std::string &pid, struct system_proc_info *ptr)
 
     getvps_cmd(pid, &ptr->cmd);
 
-    getelem(pid, $1, &ptr->user);
-    getelem(pid, $7, &ptr->tty);
-    getelem(pid, $8, &ptr->status);
-    getelem(pid, $9, &ptr->start);
-    getelem(pid, $10, &ptr->time);
+    /* ps aux | grep xxx 使用 awk 根据对应的列获取数据 */
+    getps_aux_elem(pid, $1, &ptr->user);
+    getps_aux_elem(pid, $7, &ptr->tty);
+    getps_aux_elem(pid, $9, &ptr->start_time);
+    getps_aux_elem(pid, $10, &ptr->running_time);
 
-    getelem(pid, $3, &buf);
+    getps_aux_elem(pid, $3, &buf);
     ptr->cpu = vmarchtools::value_of<float>(buf);
-    getelem(pid, $4, &buf);
+    getps_aux_elem(pid, $4, &buf);
     ptr->mem = vmarchtools::value_of<float>(buf);
-    getelem(pid, $5, &buf);
+    getps_aux_elem(pid, $5, &buf);
     ptr->vsz = vmarchtools::value_of<float>(buf);
-    getelem(pid, $6, &buf);
+    getps_aux_elem(pid, $6, &buf);
     ptr->rss = vmarchtools::value_of<float>(buf);
+
+    /* 查看 /proc/<pid>/status 文件获取数据 */
+    rcmdexec(vmarchtools::fmt("cat /proc/%s/status | grep State | awk '{print $2}'", pid.c_str()), &ptr->state);
+    rcmdexec(vmarchtools::fmt("cat /proc/%s/status | grep State | awk '{print $3}'", pid.c_str()), &ptr->state_explain);
 
 }
 
@@ -58,9 +62,9 @@ void print_proc_info(const struct system_proc_info *proc)
     vmarchtools::printf_to_stdout("      └─VSZ: %.2f%\n", proc->vsz);
     vmarchtools::printf_to_stdout("      └─RSS: %.2f%\n", proc->rss);
     vmarchtools::printf_to_stdout("    Main PID: %s\n", proc->pid.c_str());
-    vmarchtools::printf_to_stdout("  process status: %s%s%s\n", VMARCH_COLOR_BOLD_GREEN, proc->status.c_str(), VMARCH_COLOR_RESET);
-    vmarchtools::printf_to_stdout("  terminal status: %s\n", proc->tty.c_str());
-    vmarchtools::printf_to_stdout("start & run time:  %s/%s\n", proc->start.c_str(), proc->time.c_str());
+    vmarchtools::printf_to_stdout("  Main State: %s%s %s%s\n", VMARCH_COLOR_BOLD_GREEN, proc->state.c_str(), proc->state_explain.c_str(), VMARCH_COLOR_RESET);
+    vmarchtools::printf_to_stdout("  Terminal status: %s\n", proc->tty.c_str());
+    vmarchtools::printf_to_stdout("Start & Run time:  %s/%s\n", proc->start_time.c_str(), proc->running_time.c_str());
 }
 
 void cmd_status(const std::string *pcmd, VMARCHFLAGS)

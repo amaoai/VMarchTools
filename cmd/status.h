@@ -15,9 +15,10 @@ struct system_proc_info {
     std::string user;
     std::string name;
     std::string cmd;
-    std::string status;
-    std::string start;
-    std::string time;
+    std::string state;
+    std::string state_explain;
+    std::string start_time;
+    std::string running_time;
     std::string tty;
     std::string location;
     float cpu;

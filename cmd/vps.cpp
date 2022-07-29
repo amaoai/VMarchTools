@@ -9,14 +9,12 @@ void __vps(const std::string *pcmd, std::string *p_buf)
 {
     std::string buf;
     rcmdexec(getps(pcmd->empty() ? "java" : pcmd->c_str()), &buf);
-
     p_buf->assign(buf);
 }
 
 void getvps_cmd(const std::string &pid, std::string *p_buf)
 {
     rcmdexec(getps(pid, R"( for(i=11; i<(NF+1); i++) { printf "%s ", $i } )"), p_buf);
-    p_buf->pop_back();
 }
 
 bool getvps_name(const std::string &pid, std::string *p_buf)
@@ -30,8 +28,9 @@ bool getvps_name(const std::string &pid, std::string *p_buf)
 bool getvps_pid(const std::string &name, std::string *p_buf)
 {
     std::string buf;
-    rcmdexec(getps(name, R"( printf "%s,", $2 )"), &buf);
+    rcmdexec(getps(name, R"( printf "%s,", $2 )"), &buf);\
 
+    /* 如果PID不为空，删除结尾逗号 */
     if (!buf.empty())
         buf.pop_back();
 

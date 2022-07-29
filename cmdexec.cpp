@@ -36,4 +36,7 @@ void rcmdexec(const std::string &cmd, std::string *buf, bool is_print)
     __system_command_exec(cmd, is_print, buf, [](const char *buf, void *p_buf) -> void {
         ((std::string *) p_buf)->append(buf);
     });
+
+    if ((*buf)[buf->length() - 1] == '\n')
+        buf->pop_back();
 }
