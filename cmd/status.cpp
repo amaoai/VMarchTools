@@ -20,7 +20,7 @@ std::string getpid(const std::string *pcmd)
 
 
 #define getelem(pid, num, ptr) \
-    rcmdexec(getps(pid, "printf \"%s\", "#num), (ptr), false)
+    rcmdexec(getps(pid, "printf \"%s\", "#num), (ptr))
 
 void getproc(const std::string &pid, struct system_proc_info *ptr)
 {
@@ -29,6 +29,8 @@ void getproc(const std::string &pid, struct system_proc_info *ptr)
     ptr->pid.assign(pid);
     if (!getvps_name(pid, &ptr->name))
         vmarchtools::verror("进程不存在或有多个（如果PID很长就是多个PID组合起来的），PID=%s", pid.c_str());
+
+    getvps_cmd(pid, &ptr->cmd);
 
     getelem(pid, $1, &ptr->user);
     getelem(pid, $7, &ptr->tty);
@@ -49,10 +51,14 @@ void getproc(const std::string &pid, struct system_proc_info *ptr)
 void print_proc_info(const struct system_proc_info *proc)
 {
     vmarchtools::printf_to_stdout("%s•%s %s - VMarchTools proc status\n", VMARCH_COLOR_BOLD_GREEN, VMARCH_COLOR_RESET, proc->name.c_str());
+    vmarchtools::printf_to_stdout("  Execute form (%s%s%s)\n", VMARCH_COLOR_BOLD_BLUE, proc->cmd.c_str(), VMARCH_COLOR_RESET);
+    vmarchtools::printf_to_stdout("\n");
     vmarchtools::printf_to_stdout("    CPU: %.2f%, Memory: %.2f%\n", proc->cpu, proc->mem);
     vmarchtools::printf_to_stdout("    VSZ: %.2f%, RSS: %.2f%\n", proc->vsz, proc->rss);
+    vmarchtools::printf_to_stdout("\n");
     vmarchtools::printf_to_stdout("  Active Status: %s%s%s\n", VMARCH_COLOR_BOLD_GREEN, proc->status.c_str(), VMARCH_COLOR_RESET);
     vmarchtools::printf_to_stdout("  tty: %s\n", proc->tty.c_str());
+    vmarchtools::printf_to_stdout("\n");
     vmarchtools::printf_to_stdout("Start, Time %s/%s\n", proc->start.c_str(), proc->time.c_str());
 }
 
