@@ -67,7 +67,7 @@ void print_proc_info(const struct system_proc_info *proc)
     printf("      └─RSS(kb): %lu\n", proc->rss);
     printf("    Threads: %u\n", proc->threads);
     printf("    Main State: %s%s %s%s\n", VMARCH_COLOR_BOLD_GREEN, proc->state.c_str(), proc->state_explain.c_str(), VMARCH_COLOR_RESET);
-    printf("    Terminal status: %s\n", proc->tty.c_str());
+    printf("    Terminal: %s\n", proc->tty.c_str());
     printf("  Start & Run time:  %s/%s\n", proc->start_time.c_str(), proc->running_time.c_str());
     printf("  Cmdline: %s\n", proc->cmd.c_str());
 }
