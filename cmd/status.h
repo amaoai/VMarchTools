@@ -23,8 +23,9 @@ struct system_proc_info {
     std::string location;
     float cpu;
     float mem;
-    float vsz;
-    float rss;
+    unsigned long vsz;
+    unsigned long rss;
+    unsigned int threads;
     std::vector<struct proc_port_info> prots;
 };
 

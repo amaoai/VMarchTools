@@ -4,7 +4,10 @@
 
 #include <string>
 
-void pcmdexec(const std::string &cmd, bool is_print_cmd = false);
-void rcmdexec(const std::string &cmd, std::string *buf, bool is_print_cmd = false);
+/* 是否打印执行的命令行 */
+#define ENABLE_PRINT_COMMAND false
+
+void pcmdexec(const std::string &cmd, bool is_print_cmd = ENABLE_PRINT_COMMAND);
+void rcmdexec(const std::string &cmd, std::string *buf, bool is_print_cmd = ENABLE_PRINT_COMMAND);
 
 #endif /* VMARCH_CMDEXEC_H */

@@ -33,6 +33,7 @@ void pcmdexec(const std::string &cmd, bool is_print_cmd)
 
 void rcmdexec(const std::string &cmd, std::string *buf, bool is_print_cmd)
 {
+    buf->clear();
     __system_command_exec(cmd, is_print_cmd, buf, [](const char *buf, void *p_buf) -> void {
         ((std::string *) p_buf)->append(buf);
     });
