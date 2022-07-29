@@ -61,5 +61,5 @@ void cmd_vps(const std::string *pcmd, VMARCHFLAGS)
 {
     std::string vps_buf;
     __vps(pcmd, &vps_buf);
-    vmarchtools::printf_to_stdout(vps_buf);
+    vmarchtools::printf_to_stdout("%s\n", vps_buf.c_str());
 }
