@@ -46,7 +46,6 @@ void vmarchcmd_main_parse_start(int argc, char **argv, struct vmarchcmd_flags *f
             case OPTVAL_HELP: {
                 getopts_show_help("vmarch start help", vmarch_cmd_start_options, ARRAY_SIZE(vmarch_cmd_start_options));
                 exit(EXIT_SUCCESS);
-                break;
             }
             case OPT_UNKNOWN:
                 verror_unknown_cmd(xoptopt);
@@ -61,7 +60,7 @@ void vmarchcmd_main_parse_status(int argc, char **argv, struct vmarchcmd_flags *
     while (getopts(argc, argv, vmarch_cmd_status_options, ARRAY_SIZE(vmarch_cmd_status_options), &opt) != -1) {
         switch (opt) {
             case OPTVAL_STATUS_DETAIL: {
-                flags->detail = true;
+                flags->detail = xoptarg == NULL ? "/status" : xoptarg;
                 break;
             }
             case OPTVAL_HELP: {

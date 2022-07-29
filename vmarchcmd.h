@@ -46,7 +46,7 @@ const static struct option vmarch_cmd_start_options[] = {
 
 const static struct option vmarch_cmd_status_options[] = {
         {"help", "h", no_argument, OPTVAL_HELP, "显示帮助信息"},
-        {"detail", "d", no_argument, OPTVAL_STATUS_DETAIL, "查看进程详细内容"},
+        {"detail", "d", optional_argument, OPTVAL_STATUS_DETAIL, "查看进程详细内容"},
 };
 
 struct vmarchcmd_flags {
@@ -54,7 +54,7 @@ struct vmarchcmd_flags {
     int vdb;
     std::string yml;
     std::string cp;
-    bool detail;
+    std::string detail;
 };
 
 void vmarchcmd_main(int argc, char **argv);

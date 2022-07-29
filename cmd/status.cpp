@@ -76,8 +76,8 @@ void cmd_status(const std::string *pcmd, const struct vmarchcmd_flags *flags, VM
 {
     unsigned long pid = getpid(pcmd);
 
-    if (flags->detail) {
-        pcmdexec(vmarchtools::fmt("cat /proc/%lu/status", pid));
+    if (!flags->detail.empty()) {
+        pcmdexec(vmarchtools::fmt("cat /proc/%lu%s", pid, flags->detail.c_str()));
         exit(0);
     }
 
