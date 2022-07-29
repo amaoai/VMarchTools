@@ -4,6 +4,7 @@
 #include "cmdexec.h"
 #include "vmarchtools.h"
 #include <iostream>
+#include <unordered_map>
 
 void __vps(const std::string *pcmd, std::string *p_buf)
 {
@@ -38,8 +39,11 @@ bool getvps_pid(const std::string &name, std::string *p_buf)
     std::vector<std::string> pids = vmarchtools::split(buf, ",");
     if (pids.size() > 1) {
         vmarchtools::printf_to_stdout("找到多个PID，请选择其中一个：\n");
-        for (int i = 0; i < pids.size(); i++)
-            vmarchtools::printf_to_stdout("[%d] %s\n", i + 1, pids[i].c_str());
+        for (int i = 0; i < pids.size(); i++) {
+            std::string cmd;
+            getvps_cmd(pids[i], &cmd);
+            vmarchtools::printf_to_stdout("[%d] %s %s\n", i + 1,pids[i].c_str(), cmd.c_str());
+        }
 
         int idx;
         vmarchtools::printf_to_stdout("请输入你要使用的PID序号：");
