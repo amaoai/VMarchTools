@@ -25,6 +25,7 @@ namespace vmarchtools {
             ss >> ret;
             return ret;
         }
+    void sleep(unsigned int milliseconds); /* 睡眠，单位毫秒 */
 }
 
 /* 打印红色背景的文本到标准IO */

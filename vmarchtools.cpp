@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include <cstdarg>
 #include <algorithm>
+#include <thread>
 
 namespace vmarchtools {
 
@@ -85,6 +86,11 @@ namespace vmarchtools {
             ret.pop_back();
 
         return ret;
+    }
+
+    void sleep(unsigned int milliseconds)
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
     }
 
 }
