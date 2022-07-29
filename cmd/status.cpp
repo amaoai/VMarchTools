@@ -55,16 +55,17 @@ void getproc(unsigned long pid, struct system_proc_info *ptr)
 
 void print_proc_info(const struct system_proc_info *proc)
 {
-    vmarchtools::printf_to_stdout("%s●%s %s from VMarchTools <status> command.\n", VMARCH_COLOR_BOLD_GREEN, VMARCH_COLOR_RESET, proc->name.c_str());
-    vmarchtools::printf_to_stdout("    Start/Run Status (%s)\n", proc->cmd.c_str());
+    vmarchtools::printf_to_stdout("%s●%s Java Process Status - VMarchTools <status> command.\n", VMARCH_COLOR_BOLD_GREEN, VMARCH_COLOR_RESET);
+    vmarchtools::printf_to_stdout("    Jar: %s\n", proc->name.c_str());
+    vmarchtools::printf_to_stdout("    Main PID: %lu\n", proc->pid);
     vmarchtools::printf_to_stdout("      └─CPU: %.2f%\n", proc->cpu);
     vmarchtools::printf_to_stdout("      └─Memory: %.2f%\n", proc->mem);
     vmarchtools::printf_to_stdout("      └─VSZ: %.2f%\n", proc->vsz);
     vmarchtools::printf_to_stdout("      └─RSS: %.2f%\n", proc->rss);
-    vmarchtools::printf_to_stdout("    Main PID: %lu\n", proc->pid);
-    vmarchtools::printf_to_stdout("  Main State: %s%s %s%s\n", VMARCH_COLOR_BOLD_GREEN, proc->state.c_str(), proc->state_explain.c_str(), VMARCH_COLOR_RESET);
-    vmarchtools::printf_to_stdout("  Terminal status: %s\n", proc->tty.c_str());
-    vmarchtools::printf_to_stdout("Start & Run time:  %s/%s\n", proc->start_time.c_str(), proc->running_time.c_str());
+    vmarchtools::printf_to_stdout("    Main State: %s%s %s%s\n", VMARCH_COLOR_BOLD_GREEN, proc->state.c_str(), proc->state_explain.c_str(), VMARCH_COLOR_RESET);
+    vmarchtools::printf_to_stdout("    Terminal status: %s\n", proc->tty.c_str());
+    vmarchtools::printf_to_stdout("  Start & Run time:  %s/%s\n", proc->start_time.c_str(), proc->running_time.c_str());
+    vmarchtools::printf_to_stdout("  Cmdline: %s\n", proc->cmd.c_str());
 }
 
 void cmd_status(const std::string *pcmd, const struct vmarchcmd_flags *flags, VMARCHFLAGS)
