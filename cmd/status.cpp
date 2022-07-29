@@ -50,16 +50,16 @@ void getproc(const std::string &pid, struct system_proc_info *ptr)
 
 void print_proc_info(const struct system_proc_info *proc)
 {
-    vmarchtools::printf_to_stdout("%s•%s %s - VMarchTools proc status\n", VMARCH_COLOR_BOLD_GREEN, VMARCH_COLOR_RESET, proc->name.c_str());
-    vmarchtools::printf_to_stdout("  Execute form (%s%s%s)\n", VMARCH_COLOR_BOLD_BLUE, proc->cmd.c_str(), VMARCH_COLOR_RESET);
-    vmarchtools::printf_to_stdout("\n");
-    vmarchtools::printf_to_stdout("    CPU: %.2f%, Memory: %.2f%\n", proc->cpu, proc->mem);
-    vmarchtools::printf_to_stdout("    VSZ: %.2f%, RSS: %.2f%\n", proc->vsz, proc->rss);
-    vmarchtools::printf_to_stdout("\n");
-    vmarchtools::printf_to_stdout("  Active Status: %s%s%s\n", VMARCH_COLOR_BOLD_GREEN, proc->status.c_str(), VMARCH_COLOR_RESET);
-    vmarchtools::printf_to_stdout("  tty: %s\n", proc->tty.c_str());
-    vmarchtools::printf_to_stdout("\n");
-    vmarchtools::printf_to_stdout("Start, Time %s/%s\n", proc->start.c_str(), proc->time.c_str());
+    vmarchtools::printf_to_stdout("%s•%s %s from VMarchTools <status> command.\n", VMARCH_COLOR_BOLD_GREEN, VMARCH_COLOR_RESET, proc->name.c_str());
+    vmarchtools::printf_to_stdout("    Start/Run Status (%s)\n", proc->cmd.c_str());
+    vmarchtools::printf_to_stdout("      └─CPU: %.2f%\n", proc->cpu);
+    vmarchtools::printf_to_stdout("      └─Memory: %.2f%\n", proc->mem);
+    vmarchtools::printf_to_stdout("      └─VSZ: %.2f%\n", proc->vsz);
+    vmarchtools::printf_to_stdout("      └─RSS: %.2f%\n", proc->rss);
+    vmarchtools::printf_to_stdout("    Main PID: %s\n", proc->pid.c_str());
+    vmarchtools::printf_to_stdout("  process status: %s%s%s\n", VMARCH_COLOR_BOLD_GREEN, proc->status.c_str(), VMARCH_COLOR_RESET);
+    vmarchtools::printf_to_stdout("  terminal status: %s\n", proc->tty.c_str());
+    vmarchtools::printf_to_stdout("start & run time:  %s/%s\n", proc->start.c_str(), proc->time.c_str());
 }
 
 void cmd_status(const std::string *pcmd, VMARCHFLAGS)
