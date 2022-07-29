@@ -4,7 +4,6 @@
 #include "cmdexec.h"
 #include "vmarchtools.h"
 #include <iostream>
-#include <unordered_map>
 
 void __vps(const std::string *pcmd, std::string *p_buf)
 {
