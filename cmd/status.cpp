@@ -28,7 +28,7 @@ void getproc(unsigned long pid, struct system_proc_info *ptr)
 
     ptr->pid = pid;
     if (!getvps_name(pid, &ptr->name))
-        vmarchtools::verror("进程不存在或有多个（如果PID很长就是多个PID组合起来的），PID=%d", pid);
+        vmarchtools::verror("进程不存在，或当前进程非Java进程", pid);
 
     getvps_cmd(pid, &ptr->cmd);
 
