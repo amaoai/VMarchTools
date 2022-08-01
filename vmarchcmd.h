@@ -3,6 +3,7 @@
 #define VMARCH_VMARCHCMD_H
 
 #include "opts/opts.h"
+#include "vmarchtools.h"
 #include <cstdlib>
 #include <string>
 
@@ -31,10 +32,8 @@
 #define OPTVAL_STATUS_DETAIL        1
 
 /* 未知命令 */
-inline static void verror_unknown_cmd(const std::string& cmd) {
-    fprintf(stderr, "unknown command: %s\n", cmd.c_str());
-    exit(EXIT_FAILURE);
-}
+#define verror_unknown_cmd(CMD) \
+  vmarchtools::verror("unknown command: %s\n", (CMD).c_str())
 
 const static struct option vmarch_cmd_start_options[] = {
         {"help", "h", no_argument, OPTVAL_HELP, "显示帮助信息"},
