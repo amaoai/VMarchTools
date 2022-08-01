@@ -3,7 +3,6 @@
 
 #include "cmd/declcmd.h"
 #include "vmarchtools.h"
-#include <stdexcept>
 
 /**
  * 判断是否存在某个命令，比如：has_cmd(cmd_val, "help", "stop", ...)
@@ -132,7 +131,7 @@ VMARCHCMD getcmd(int argc, char **argv, std::string *pcmd)
 
 UNKNOWN_COMMAND:
     if (cmd == 0)
-        throw std::runtime_error("unknown command " + cmdstr);
+        verror_unknown_cmd(cmdstr);
 
     if (argc >= 3)
         if (argv[2] != nullptr && argv[2][0] != '-')
@@ -144,7 +143,7 @@ UNKNOWN_COMMAND:
 void vmarchcmd_main(int argc, char **argv)
 {
     if (argc < 2)
-        throw std::runtime_error("no command");
+        vmarchtools::verror("no command");
 
     std::string pcmd;
     VMARCHCMD cmd = getcmd(argc, argv, &pcmd);

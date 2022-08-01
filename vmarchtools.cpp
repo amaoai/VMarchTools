@@ -4,7 +4,6 @@
 
 #include "vmarchtools.h"
 #include <cstdio>
-#include <stdexcept>
 #include <cstdarg>
 #include <algorithm>
 #include <thread>
@@ -36,8 +35,9 @@ namespace vmarchtools {
     {
         va_list va;
         va_start(va, __fmt);
-        throw std::runtime_error(vfmt(__fmt, va));
+        vfprintf(stderr, __fmt.c_str(), va);
         va_end(va);
+        exit(EXIT_SUCCESS);
     }
 
     bool is_number(const std::string &str)

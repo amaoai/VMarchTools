@@ -1,6 +1,6 @@
 /* AUTHOR: TIAN_SHENG, DATE: 2022/7/27 */
 #include "cmdexec.h"
-#include <stdexcept>
+#include "vmarchtools.h"
 
 typedef void(*f_system_command_exec_callback)(const char *buf, void *);
 
@@ -12,7 +12,7 @@ void __system_command_exec(const std::string &cmd, bool is_print_cmd, void *ptr,
         printf("[CMD] - %s\n", cmd.c_str());
 
     if ((fp = popen(cmd.c_str(), "r")) == nullptr)
-        throw std::runtime_error("popen failed");
+        vmarchtools::verror("popen failed");
 
     /* 读取buf */
     char buf[1024] = {};
