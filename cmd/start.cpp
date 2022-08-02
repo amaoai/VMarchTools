@@ -16,7 +16,7 @@ std::string check_java_file(const std::string *pcmd)
 
     if (vecfile.empty())
         vmarchtools::verror("当前目录下没找到可执行JAR包（如果有WAR包等其他格式请手动指定）："
-                            "\n\t%svmarch start <JAR包名>%s", VMARCH_COLOR_RED, VMARCH_COLOR_RESET);
+                            "\n  $ vmarch <CMD> <JAR包名 | 进程名>\n");
 
     if (vecfile.size() > 1) {
         std::stringstream ss;

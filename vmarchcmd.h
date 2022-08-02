@@ -33,7 +33,7 @@
 
 /* 未知命令 */
 #define verror_unknown_cmd(CMD) \
-  vmarchtools::verror("unknown command: %s\n", (CMD).c_str())
+  vmarchtools::verror("unknown command: %s\n", (CMD))
 
 const static struct option vmarch_cmd_start_options[] = {
         {"help", "h", no_argument, OPTVAL_HELP, "显示帮助信息"},
