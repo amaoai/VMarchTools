@@ -31,7 +31,7 @@ void vmarchcmd_main_parse_start(int argc, char **argv, struct vmarchcmd_flags *f
                 break;
             }
             case OPTVAL_START_VDB: {
-                flags->vdb = atoi(xoptarg);
+                flags->vdb = vmarchtools::value_of<int>(xoptarg);
                 break;
             }
             case OPTVAL_START_YML: {
