@@ -131,7 +131,7 @@ VMARCHCMD getcmd(int argc, char **argv, std::string *pcmd)
 
 UNKNOWN_COMMAND:
     if (cmd == 0)
-        verror_unknown_cmd(cmdstr);
+        verror_unknown_cmd(cmdstr.c_str());
 
     if (argc >= 3)
         if (argv[2] != nullptr && argv[2][0] != '-')
