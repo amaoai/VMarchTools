@@ -60,7 +60,7 @@ void print_proc_info(const struct system_proc_info *proc)
 {
     printf("%s●%s Java Process Status - VMarchTools <status> command.\n", VMARCH_COLOR_BOLD_GREEN, VMARCH_COLOR_RESET);
     printf("    Jar: %s\n", proc->name.c_str());
-    printf("    Main PID: %lu\n", proc->pid);
+    printf("    Main PID: %s%lu%s\n", VMARCH_COLOR_BOLD_BLUE, proc->pid, VMARCH_COLOR_RESET);
     printf("      └─CPU: %.2f%\n", proc->cpu);
     printf("      └─Memory: %.2f%\n", proc->mem);
     printf("      └─VSZ(kb): %lu\n", proc->vsz);
