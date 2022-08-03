@@ -78,12 +78,11 @@ void cmd_status(const std::string *pcmd, const struct vmarchcmd_flags *flags, VM
     if (!flags->detail.empty()) {
         pcmdexec(vmarchtools::fmt("cat /proc/%lu%s", pid, flags->detail.c_str()));
         PROGRAM_EXIT_SUCCESS();
+    } else {
+        struct system_proc_info proc {};
+        getproc(pid, &proc);
+        print_proc_info(&proc);
     }
-
-    /* 打印进程状态信息 */
-    struct system_proc_info proc {};
-    getproc(pid, &proc);
-    print_proc_info(&proc);
 
     if (flags->net) {
         printf("\n");
