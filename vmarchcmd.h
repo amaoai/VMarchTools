@@ -30,7 +30,7 @@
 #define OPTVAL_START_CP             4
 
 #define OPTVAL_STATUS_DETAIL        1
-#define OPTVAL_STATUS_NET           2
+#define OPTVAL_STATUS_NETWORK       2
 
 /* 未知命令 */
 #define verror_unknown_cmd(CMD) \
@@ -47,7 +47,7 @@ const static struct option vmarch_cmd_start_options[] = {
 const static struct option vmarch_cmd_status_options[] = {
         {"help",    "h", no_argument,       OPTVAL_HELP,          "显示帮助信息"},
         {"detail",  "d", optional_argument, OPTVAL_STATUS_DETAIL, "查看进程详细内容"},
-        {"network", "n", no_argument,       OPTVAL_STATUS_NET,    "打印网络信息"},
+        {"network", "n", no_argument,       OPTVAL_STATUS_NETWORK,    "打印网络信息"},
 };
 
 struct vmarchcmd_flags {

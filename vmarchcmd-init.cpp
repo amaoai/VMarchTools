@@ -62,7 +62,7 @@ void vmarchcmd_main_parse_status(int argc, char **argv, struct vmarchcmd_flags *
                 flags->detail = xoptarg == NULL ? "/status" : xoptarg;
                 break;
             }
-            case OPTVAL_STATUS_NET: {
+            case OPTVAL_STATUS_NETWORK: {
                 flags->net = true;
                 break;
             }

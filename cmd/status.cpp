@@ -77,7 +77,6 @@ void cmd_status(const std::string *pcmd, const struct vmarchcmd_flags *flags, VM
 
     if (!flags->detail.empty()) {
         pcmdexec(vmarchtools::fmt("cat /proc/%lu%s", pid, flags->detail.c_str()));
-        PROGRAM_EXIT_SUCCESS();
     } else {
         struct system_proc_info proc {};
         getproc(pid, &proc);
@@ -88,5 +87,4 @@ void cmd_status(const std::string *pcmd, const struct vmarchcmd_flags *flags, VM
         printf("\n");
         pcmdexec(vmarchtools::fmt("netstat -anp | grep %lu | grep -v unix", pid));
     }
-
 }
