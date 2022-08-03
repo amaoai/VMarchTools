@@ -62,6 +62,10 @@ void vmarchcmd_main_parse_status(int argc, char **argv, struct vmarchcmd_flags *
                 flags->detail = xoptarg == NULL ? "/status" : xoptarg;
                 break;
             }
+            case OPTVAL_STATUS_NET: {
+                flags->net = xoptarg == NULL ? "anp" : xoptarg;
+                break;
+            }
             case OPTVAL_HELP: {
                 getopts_show_help("vmarch start help", vmarch_cmd_status_options, ARRAY_SIZE(vmarch_cmd_status_options));
                 exit(EXIT_SUCCESS);
