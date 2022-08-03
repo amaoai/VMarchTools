@@ -18,8 +18,7 @@ unsigned long getpid(const std::string *pcmd)
     return pid;
 }
 
-
-#define getps_aux_elem(pid, num, ptr) \
+#define getps_aux_element(pid, num, ptr) \
     rcmdexec(getps(std::to_string(pid), "printf \"%s\", "#num), (ptr))
 
 void getproc(unsigned long pid, struct system_proc_info *ptr)
@@ -33,18 +32,18 @@ void getproc(unsigned long pid, struct system_proc_info *ptr)
     getvps_cmd(pid, &ptr->cmd);
 
     /* ps aux | grep xxx 使用 awk 根据对应的列获取数据 */
-    getps_aux_elem(pid, $1, &ptr->user);
-    getps_aux_elem(pid, $7, &ptr->tty);
-    getps_aux_elem(pid, $9, &ptr->start_time);
-    getps_aux_elem(pid, $10, &ptr->running_time);
+    getps_aux_element(pid, $1, &ptr->user);
+    getps_aux_element(pid, $7, &ptr->tty);
+    getps_aux_element(pid, $9, &ptr->start_time);
+    getps_aux_element(pid, $10, &ptr->running_time);
 
-    getps_aux_elem(pid, $3, &buf);
+    getps_aux_element(pid, $3, &buf);
     ptr->cpu = vmarchtools::value_of<float>(buf);
-    getps_aux_elem(pid, $4, &buf);
+    getps_aux_element(pid, $4, &buf);
     ptr->mem = vmarchtools::value_of<float>(buf);
-    getps_aux_elem(pid, $5, &buf);
+    getps_aux_element(pid, $5, &buf);
     ptr->vsz = vmarchtools::value_of<unsigned long>(buf);
-    getps_aux_elem(pid, $6, &buf);
+    getps_aux_element(pid, $6, &buf);
     ptr->rss = vmarchtools::value_of<unsigned long>(buf);
 
     /* 查看 /proc/<pid>/status 文件获取数据 */
