@@ -37,17 +37,17 @@
   vmarchtools::verror("unknown command: %s\n", (CMD))
 
 const static struct option vmarch_cmd_start_options[] = {
-        {"help", "h", no_argument, OPTVAL_HELP, "显示帮助信息"},
-        {"tail", "xtl", no_argument, OPTVAL_START_XTL, "打印程序执行日志"},
-        {"", "vdb", required_argument, OPTVAL_START_VDB, "远程调试端口"},
-        {"", "yml", required_argument, OPTVAL_START_YML, "指定配置文件路径"},
-        {"", "cp", required_argument, OPTVAL_START_CP, "指定配置文件后缀"}
+        {"help", "h",   no_argument,       OPTVAL_HELP,      "显示帮助信息"},
+        {"tail", "xtl", no_argument,       OPTVAL_START_XTL, "打印程序执行日志"},
+        {"",     "vdb", required_argument, OPTVAL_START_VDB, "远程调试端口"},
+        {"",     "yml", required_argument, OPTVAL_START_YML, "指定配置文件路径"},
+        {"",     "cp",  required_argument, OPTVAL_START_CP,  "指定配置文件后缀"}
 };
 
 const static struct option vmarch_cmd_status_options[] = {
-        {"help", "h", no_argument, OPTVAL_HELP, "显示帮助信息"},
+        {"help",   "h", no_argument,       OPTVAL_HELP,          "显示帮助信息"},
         {"detail", "d", optional_argument, OPTVAL_STATUS_DETAIL, "查看进程详细内容"},
-        {"net", "n", optional_argument, OPTVAL_STATUS_NET, "打印网络信息"},
+        {"net",    "n", optional_argument, OPTVAL_STATUS_NET,    "打印网络信息"},
 };
 
 struct vmarchcmd_flags {
