@@ -35,7 +35,7 @@ namespace vmarchtools {
     {
         va_list va;
         va_start(va, __fmt);
-        vfprintf(stderr, __fmt.c_str(), va);
+        vfprintf(stderr, (__fmt + "\n").c_str(), va);
         va_end(va);
         exit(EXIT_SUCCESS);
     }

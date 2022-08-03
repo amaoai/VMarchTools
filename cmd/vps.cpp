@@ -48,7 +48,7 @@ bool getvps_pid(const std::string &name, unsigned long *p_pid)
         std::cin >> idx;
 
         if (idx > pids.size())
-            vmarchtools::verror("序号超出范围！");
+            vmarchtools::verror("序号超出范围");
 
         buf.assign(pids[idx - 1]);
     }
