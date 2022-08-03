@@ -8,6 +8,7 @@
 #include <sstream>
 
 #define ARRAY_SIZE(a) ( sizeof(a) / sizeof(a[0]) )
+#define PROGRAM_EXIT_SUCCESS() exit(EXIT_SUCCESS)
 extern std::string check_java_file(const std::string *pcmd);
 
 namespace vmarchtools {

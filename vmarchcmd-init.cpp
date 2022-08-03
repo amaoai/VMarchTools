@@ -63,7 +63,7 @@ void vmarchcmd_main_parse_status(int argc, char **argv, struct vmarchcmd_flags *
                 break;
             }
             case OPTVAL_STATUS_NET: {
-                flags->net = xoptarg == NULL ? "anp" : xoptarg;
+                flags->net = true;
                 break;
             }
             case OPTVAL_HELP: {

@@ -45,18 +45,18 @@ const static struct option vmarch_cmd_start_options[] = {
 };
 
 const static struct option vmarch_cmd_status_options[] = {
-        {"help",   "h", no_argument,       OPTVAL_HELP,          "显示帮助信息"},
-        {"detail", "d", optional_argument, OPTVAL_STATUS_DETAIL, "查看进程详细内容"},
-        {"net",    "n", optional_argument, OPTVAL_STATUS_NET,    "打印网络信息"},
+        {"help",    "h", no_argument,       OPTVAL_HELP,          "显示帮助信息"},
+        {"detail",  "d", optional_argument, OPTVAL_STATUS_DETAIL, "查看进程详细内容"},
+        {"network", "n", no_argument,       OPTVAL_STATUS_NET,    "打印网络信息"},
 };
 
 struct vmarchcmd_flags {
-    bool xtl;
-    int vdb;
+    bool        xtl;
+    int         vdb;
     std::string yml;
     std::string cp;
     std::string detail;
-    std::string net;
+    bool        net;
 };
 
 void vmarchcmd_main(int argc, char **argv);

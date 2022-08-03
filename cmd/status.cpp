@@ -75,17 +75,19 @@ void cmd_status(const std::string *pcmd, const struct vmarchcmd_flags *flags, VM
 {
     unsigned long pid = getpid(pcmd);
 
-    if (!flags->net.empty()) {
-        pcmdexec(vmarchtools::fmt("netstat -anp | grep %lu", pid));
-        exit(0);
-    }
-
     if (!flags->detail.empty()) {
         pcmdexec(vmarchtools::fmt("cat /proc/%lu%s", pid, flags->detail.c_str()));
-        exit(0);
+        PROGRAM_EXIT_SUCCESS();
     }
 
+    /* 打印进程状态信息 */
     struct system_proc_info proc {};
     getproc(pid, &proc);
     print_proc_info(&proc);
+
+    if (flags->net) {
+        printf("\n");
+        pcmdexec(vmarchtools::fmt("netstat -anp | grep %lu | grep -v unix", pid));
+    }
+
 }
