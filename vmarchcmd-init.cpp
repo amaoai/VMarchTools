@@ -63,7 +63,11 @@ void vmarchcmd_main_parse_status(int argc, char **argv, struct vmarchcmd_flags *
                 break;
             }
             case OPTVAL_STATUS_NETWORK: {
-                flags->net = true;
+                flags->network = true;
+                break;
+            }
+            case OPTVAL_STATUS_THREADS: {
+                flags->threads = true;
                 break;
             }
             case OPTVAL_HELP: {

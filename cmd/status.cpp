@@ -83,7 +83,7 @@ void cmd_status(const std::string *pcmd, const struct vmarchcmd_flags *flags, VM
         print_proc_info(&proc);
     }
 
-    if (flags->net) {
+    if (flags->network) {
         printf("\n");
         pcmdexec(vmarchtools::fmt("netstat -anp | grep %lu | grep -v unix", pid));
     }
