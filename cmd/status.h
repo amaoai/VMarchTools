@@ -4,6 +4,7 @@
 
 #include <string>
 #include <vector>
+#include "vmarchtools.h"
 
 struct proc_port_info {
     std::string protocol;
@@ -30,9 +31,8 @@ struct system_proc_info {
 };
 
 unsigned long getpid(const std::string *pcmd);
-/* 获取进程状态 */
-void getproc(unsigned long pid, struct system_proc_info *ptr);
-/* 打印进程状态 */
-void print_proc_info(const struct system_proc_info *proc);
+void getproc(unsigned long pid, struct system_proc_info *ptr); /* 获取进程状态 */
+void print_proc_info(const struct system_proc_info *proc); /* 打印进程状态 */
+extern void get_jvm_threads(unsigned long pid, std::vector<struct jvm_thread_info> *ptr);
 
 #endif /* VMARCHTOOLS_STATUS_H */

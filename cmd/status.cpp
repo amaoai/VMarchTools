@@ -2,7 +2,6 @@
 #include "declcmd.h"
 #include "status.h"
 #include "vps.h"
-#include "vmarchtools.h"
 #include "cmdexec.h"
 
 unsigned long getpid(const std::string *pcmd)
@@ -81,6 +80,11 @@ void cmd_status(const std::string *pcmd, const struct vmarchcmd_flags *flags, VM
         struct system_proc_info proc {};
         getproc(pid, &proc);
         print_proc_info(&proc);
+    }
+
+    if (flags->threads) {
+        printf("\n");
+        pcmdexec(vmarchtools::fmt("jstack -l %lu", pid));
     }
 
     if (flags->network) {
