@@ -20,6 +20,18 @@ uint64_t has_cmd(VMARCHCMD cmd, Args... va_list)
     return false;
 }
 
+#define VMARCGTOOLS_MESSAGE "" \
+                "无参命令: \n" \
+                "  - ps         显示当前系统中正在运行的Java进程（不包括容器）\n" \
+                "  - stop       停止当前正在运行的Java进程，需要到jar包目录执行。或者直接输入进程名\n" \
+                "\n" \
+                "带参命令: \n" \
+                "  - start      启动Java进程，需要到jar包目录执行。\n" \
+                "  - restart    重启Java进程，需要到jar包目录执行。\n" \
+                "  - status     显示进程状态，（需要到jar包目录执行或输入进程名）\n"\
+                "\n"           \
+                "命令参数详情请使用 vmarch <command> -h 查看"
+
 /* 解析 start 或 restart 需要的选项 */
 void vmarchcmd_main_parse_start(int argc, char **argv, struct vmarchcmd_flags *flags)
 {
@@ -151,7 +163,7 @@ UNKNOWN_COMMAND:
 void vmarchcmd_main(int argc, char **argv)
 {
     if (argc < 2)
-        vmarchtools::verror("no command");
+        vmarchtools::verror(VMARCGTOOLS_MESSAGE);
 
     std::string pcmd;
     VMARCHCMD cmd = getcmd(argc, argv, &pcmd);
