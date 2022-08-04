@@ -48,16 +48,22 @@ void getproc(unsigned long pid, struct system_proc_info *ptr)
     /* 查看 /proc/<pid>/status 文件获取数据 */
     rcmdexec(vmarchtools::fmt("cat /proc/%d/status | grep State | awk '{print $2}'", pid), &ptr->state);
     rcmdexec(vmarchtools::fmt("cat /proc/%d/status | grep State | awk '{print $3}'", pid), &ptr->state_explain);
+
     /* 获取当前进程线程数 */
     rcmdexec(vmarchtools::fmt("cat /proc/%d/status | grep Threads | awk '{print $2}'", pid), &buf);
     ptr->threads = vmarchtools::value_of<unsigned int>(buf);
 
+    /* 获取jar包所在位置 */
+    std::string location_buf;
+    rcmdexec(vmarchtools::fmt("echo \"$(cd /proc/3945702/cwd & pwd -LP)\"", pid), &location_buf);
+    ptr->location = location_buf;
 }
 
 void print_proc_info(const struct system_proc_info *proc)
 {
     printf("%s●%s Java Process Status - VMarchTools <status> command.\n", VMARCH_COLOR_BOLD_GREEN, VMARCH_COLOR_RESET);
     printf("    Jar: %s\n", proc->name.c_str());
+    printf("    Location: %s\n", proc->location.c_str());
     printf("    Main PID: %s%lu%s\n", VMARCH_COLOR_BOLD_BLUE, proc->pid, VMARCH_COLOR_RESET);
     printf("      └─CPU: %.2f%\n", proc->cpu);
     printf("      └─Memory: %.2f%\n", proc->mem);
